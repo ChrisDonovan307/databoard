@@ -1,31 +1,65 @@
 from dash import Dash, html, dcc
 import dash
-
+import dash_bootstrap_components as dbc
+from dash_bootstrap_templates import ThemeSwitchAIO
 PREFIX = '/databoard/'
 
 app = dash.Dash(
     __name__, 
     use_pages=True,
     requests_pathname_prefix=PREFIX,
-    routes_pathname_prefix=PREFIX
+    routes_pathname_prefix=PREFIX,
+    external_stylesheets=[dbc.themes.DARKLY]
 )
-server = app.server #
+
+theme_toggle = ThemeSwitchAIO(
+    aio_id="theme",
+    themes=[dbc.themes.DARKLY, dbc.themes.FLATLY],
+    icons={"left": "fa fa-sun", "right": "fa fa-moon"},
+)
+
+footer = html.Div(
+    [
+        html.Hr(style={'margin': '0'}),
+        html.P('© 2025 Databoard', style={'textAlign': 'center', 'fontSize': '14px', 'color': '#6c757d', 'padding': '20px 0'})
+    ], style={'width': '100%', 'marginTop': 'auto'}
+)
+
+server = app.server
+
+header = dbc.Navbar(
+    dbc.Container(
+        [
+            html.A(
+                dbc.Row([dbc.Col(dbc.NavbarBrand("The Dashboard"))], align="center"),
+                href="/databoard/",
+                style={"textDecoration": "none"},
+            ),
+            theme_toggle,
+            dbc.Row(
+                [
+                    dbc.NavbarToggler(id="navbar-toggler"),
+                    dbc.Nav(
+                        [
+                            dbc.NavLink(page["name"], href="/databoard" + page["path"])
+                            for page in dash.page_registry.values()
+                            if page["module"] != "pages.not_found_404"
+                        ]
+                    ),
+                ]
+            ),
+        ],
+        fluid=True,
+    ),
+    dark=True,
+    color="dark"
+)
 
 app.layout = html.Div([
-	html.H1('Multi-page app with Dash Pages'),
-
-    html.Div([
-        html.Div(
-            dcc.Link(
-                 f"{page['name']} - {page['relative_path']}", href=f"{page["relative_path"]}"
-            )
-        )
-        for page in dash.page_registry.values()
-    ]),
-
-	dash.page_container
-])
+    header,
+    html.Div(dash.page_container, style={'flex': '1'}),
+    footer
+], style={'minHeight': '100vh', 'display': 'flex', 'flexDirection': 'column'})
 
 if __name__ == '__main__':
-	app.run(debug=False) #
-
+	app.run(debug=False)
