@@ -7,11 +7,12 @@ import pdb
 PREFIX = '/databoard/'
 
 app = dash.Dash(
-    __name__, 
+    __name__,
     use_pages=True,
     requests_pathname_prefix=PREFIX,
     routes_pathname_prefix=PREFIX,
-    external_stylesheets=[dbc.themes.DARKLY]
+    external_stylesheets=[dbc.themes.DARKLY],
+    suppress_callback_exceptions=True
 )
 
 #$ Theme
@@ -75,7 +76,6 @@ app.layout = html.Div([
     html.Div(dash.page_container, style={'flex': '1'}),
     footer
 ], style={'minHeight': '100vh', 'display': 'flex', 'flexDirection': 'column'})
-
 
 print([p['module'] for p in dash.page_registry.values()])
 
