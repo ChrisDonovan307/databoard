@@ -45,11 +45,5 @@ layout = html.Div([
                 }
             ]
         )
-    ], style={'maxWidth': '1200px', 'margin': '0 auto', 'padding': '20px'}),
-
-    # Footer
-    # html.Div([
-    #     html.Hr(),
-    #     html.P('© 2025 Databoard', style={'textAlign': 'center', 'color': '#7f8c8d', 'fontSize': '14px'})
-    # ], style={'marginTop': '50px'})
+    ], style={'maxWidth': '1200px', 'margin': '0 auto', 'padding': '20px'})
 ])
