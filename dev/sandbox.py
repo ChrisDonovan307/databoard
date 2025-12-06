@@ -1,7 +1,9 @@
 import pandas as pd
+import os
 
-df = pd.read_csv('data/installations/installations.csv')
+print(os.getcwd())
 
+df = pd.read_csv('../data/installations/installations.csv')
 df.columns
 df.info()
 

@@ -1,3 +1,4 @@
+import os
 from dash import Dash, html, dcc, page_registry
 import dash
 import dash_bootstrap_components as dbc
@@ -5,14 +6,15 @@ from dash_bootstrap_templates import ThemeSwitchAIO
 import pdb
 
 PREFIX = '/databoard/'
+ROOT = os.path.dirname(os.path.abspath(__file__))
 
 app = dash.Dash(
-    __name__,
+    __name__, 
     use_pages=True,
+    pages_folder=os.path.join(ROOT, "app", "pages"), # specify path to pages from root
     requests_pathname_prefix=PREFIX,
     routes_pathname_prefix=PREFIX,
-    external_stylesheets=[dbc.themes.DARKLY],
-    suppress_callback_exceptions=True
+    external_stylesheets=[dbc.themes.DARKLY]
 )
 
 #$ Theme
@@ -76,6 +78,7 @@ app.layout = html.Div([
     html.Div(dash.page_container, style={'flex': '1'}),
     footer
 ], style={'minHeight': '100vh', 'display': 'flex', 'flexDirection': 'column'})
+
 
 print([p['module'] for p in dash.page_registry.values()])
 
