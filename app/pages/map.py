@@ -9,7 +9,7 @@ import pandas as pd
 
 dash.register_page(__name__, path="/map")
 
-df = pd.read_csv("data/installations/installations.csv")
+df = pd.read_csv("app/data/installations/installations.csv")
 df["launch_year"] = df["launch_year"].astype(int)
 df["years_since_launch"] = 2025 - df["launch_year"]
 

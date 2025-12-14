@@ -1,7 +1,9 @@
 from dash import html, dash_table
 import dash
+
 import pandas as pd
 from sklearn.datasets import load_iris
+import dash_ag_grid as dag
 
 dash.register_page(__name__, path="/tables")
 
@@ -9,6 +11,42 @@ dash.register_page(__name__, path="/tables")
 iris = load_iris()
 df = pd.DataFrame(iris.data, columns=iris.feature_names)
 df["species"] = pd.Categorical.from_codes(iris.target, iris.target_names)
+
+column_defs = [
+    {
+        'field': 'sepal length (cm)', 
+        'headerName': 'Sepal Length (cm)',
+        'filter': 'agNumberColumnFilter', 
+    },
+    {
+        'field': 'sepal width (cm)', 
+        'filter': 'agNumberColumnFilter'
+    },
+    {   
+        'field': 'petal length (cm)', 
+        'filter': 'agNumberColumnFilter'
+    },
+    {
+        'field': 'petal width (cm)', 
+        'filter': 'agNumberColumnFilter'
+    },
+    {
+        'field': 'species',
+        'headerName': 'Species',
+        'filter': 'agTextColumnFilter'
+    },
+]
+
+# grid_options={'animateRows': False}
+
+grid = dag.AgGrid(
+    id='table',
+    rowData=df.to_dict('records'),
+    # columnDefs=[{"field": i} for i in df.columns], # shortcut 
+    columnDefs=column_defs,
+    columnSize='sizeToFit', # widths
+    # dashGridOptions=grid_options
+)
 
 layout = html.Div(
     [
@@ -31,28 +69,7 @@ layout = html.Div(
         html.Div(
             [
                 html.H2("Iris Dataset Table"),
-                html.P(
-                    "Click column headers to sort, use filters to search. Showing 10 rows per page."
-                ),
-                dash_table.DataTable(
-                    data=df.to_dict("records"),
-                    columns=[{"name": i, "id": i} for i in df.columns],
-                    page_size=10,
-                    sort_action="native",
-                    filter_action="native",
-                    style_table={"overflowX": "auto"},
-                    style_cell={"textAlign": "left", "padding": "10px"},
-                    style_header={
-                        "backgroundColor": "rgb(210, 210, 210)",
-                        "fontWeight": "bold",
-                    },
-                    style_data_conditional=[
-                        {
-                            "if": {"row_index": "odd"},
-                            "backgroundColor": "rgb(220, 220, 220)",
-                        }
-                    ],
-                ),
+                grid,
             ],
             style={"maxWidth": "1200px", "margin": "0 auto", "padding": "20px"},
         ),

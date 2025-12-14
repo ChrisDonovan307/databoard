@@ -83,4 +83,4 @@ app.layout = html.Div(
 print([p["module"] for p in dash.page_registry.values()])
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)

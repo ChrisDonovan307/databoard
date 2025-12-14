@@ -7,7 +7,7 @@ import datetime
 
 dash.register_page(__name__, path="/graphs")
 
-dat = pd.read_csv("data/iris.csv")
+dat = pd.read_csv("app/data/iris.csv")
 
 hist_graph = px.histogram(
     dat,
