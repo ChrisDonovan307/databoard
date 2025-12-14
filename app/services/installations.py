@@ -17,9 +17,34 @@ def save_installations_json(response):
         f.write(response.text)
 
 def get_installations_df(response):
+    """Download installation list
+
+    Returns
+    -------
+    df : pd.DataFrame
+        DataFrame that includes installation names, urls, lat, lng, etc.
+    """
+
     data = response.json()
     df = pd.DataFrame(data['installations'])
+    df = add_uvm(df)
     df["url"] = "https://" + df["hostname"]
+    return df
+
+def add_uvm(df):
+    """Add UVM to installation list
+
+    UVM is not included in list at Dataverse site. Adding it here
+    """
+    df.loc[len(df)] = {
+        'name': 'University of Vermont Dataverse',
+        'description': '',
+        'lat': 44.478385,
+        'lng': -73.200558,
+        'hostname': 'dataverse.uvm.edu',
+        'launch_year': 2025,
+        'country': 'USA'
+    }
     return df
 
 def save_installations_csv(df):
@@ -54,7 +79,12 @@ def save_installations_geojson(df):
         f.write(json.dumps(geojson))
 
 def save_installations_parquet(df):
-    df.to_parquet("app/data/installations/installations.parquet", index=False)
+    # Convert to consistent types for parquet
+    df_copy = df.copy()
+    if 'launch_year' in df_copy.columns:
+        # First convert to numeric (coercing errors to NaN), then Int64
+        df_copy['launch_year'] = pd.to_numeric(df_copy['launch_year'], errors='coerce').astype('Int64')
+    df_copy.to_parquet("app/data/installations/installations.parquet", index=False)
 
 def read_installations_response():
     with open("data/installations/response.json", "r") as f:

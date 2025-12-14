@@ -1,4 +1,5 @@
 from app.services.installations import * 
+from app.services.metadata import * 
 
 def refresh_installations():
     """
@@ -11,24 +12,60 @@ def refresh_installations():
     save_installations_geojson(df)
     save_installations_csv(df)
 
+def refresh_metadata(start=0, rows=1000, page_limit=2):
+    """
+    Using list of installations, get metadata for stored collections for each one
+    """
+    urls = metadata_setup()
+    pull_combine_save(
+        urls,
+        start=start,
+        rows=rows,
+        page_limit=page_limit
+    )
+
 if __name__ == "__main__":
     refresh_installations()
 
-    # for when we have multiple operations:
-    # import argparse
-    # parser = argparse.ArgumentParser(description="Run specific refresh functions.")
-    # parser.add_argument(
-    #     "function",
-    #     choices=["installations", "metadata", "all"],
-    #     help="Which refresh function to run"
-    # )
+    # for adding arguments
+    import argparse
+    parser = argparse.ArgumentParser(
+        prog="Orchestrator",
+        description="Run sets of functions to refresh metadata from Dataverse with API calls."
+    )
+    parser.add_argument(
+        "--cmd",
+        required=True,
+        choices=["installations", "metadata", "all"],
+        help="Which set of functions to run. \
+            'installations': pull list of installations from Dataverse map. \
+            'metadata': use Dataverse search API to get metadata from each Dataverse, combine, and save."
+    )
+    parser.add_argument(
+        "--start",
+        type=int,
+        default=0,
+        help="Starting record for pagination (default: 0)"
+    )
+    parser.add_argument(
+        "--rows",
+        type=int,
+        default=1000,
+        help="Number of rows per query (default: 1000)"
+    )
+    parser.add_argument(
+        "--page_limit",
+        type=int,
+        default=2,
+        help="Maximum number of pages to fetch (default: 2)"
+    )
 
-    # args = parser.parse_args()
+    args = parser.parse_args()
 
-    # if args.function == "metadata":
-    #     refresh_metadata()
-    # elif args.function == "installations":
-    #     refresh_installations()
-    # elif args.function == 'all':
-    #     refresh_installations()
-    #     refresh_metadata()
+    if args.cmd == "metadata":
+        refresh_metadata(start=args.start, rows=args.rows, page_limit=args.page_limit)
+    elif args.cmd == "installations":
+        refresh_installations()
+    elif args.cmd == 'all':
+        refresh_installations()
+        refresh_metadata(start=args.start, rows=args.rows, page_limit=args.page_limit)

@@ -52,6 +52,19 @@ df.info()
 print(df.loc[0,])
 print(df.loc[1,])
 
+# Add UVM
+df.columns
+df.loc[len(df)] = {
+    'name': 'University of Vermont Dataverse',
+    'description': '',
+    'lat': 44.478385,
+    'lng': -73.200558,
+    'hostname': 'dataverse.uvm.edu',
+    'launch_year': 2025,
+    'country': 'USA'
+}
+df.reset_index()
+
 # Create a proper URL column
 df["url"] = "https://" + df["hostname"]
 df.url

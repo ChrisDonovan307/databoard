@@ -1,13 +1,25 @@
-To run orchestrator from CLI:
+## Orchestrator
+
+Get help:
 
 ```
-python -m app.services.orchestrator
+python -m app.services.orchestrator --help
 ```
 
-This way it runs it as a module and recognizes file structure.
-
-For specific functions (not implemented yet):
+Run everything:
 
 ```
-python -m app.services.orchestrator metadata
+python -m app.services.orchestrator --cmd all
+```
+
+### Installations
+
+```
+python -m app.services.orchestrator --cmd installations
+```
+
+### Metadata Refresh
+
+```
+python -m app.services.metadata --cmd metadata
 ```
