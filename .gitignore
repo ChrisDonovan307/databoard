@@ -2,6 +2,13 @@ venv/*
 .venv/*
 .env
 *__pycache__*
+
 # pixi environments
 .pixi/*
 !.pixi/config.toml
+
+# large files we don't really need
+app/data/metadata/metadata.csv
+app/data/metadata_backup/metadata.csv
+
+aiohttp_cache.sqlite

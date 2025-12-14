@@ -1,22 +1,46 @@
-import pandas as pd
 import json
+import os
+
+import pandas as pd
 from dotenv import load_dotenv
+
 import requests
 import requests_cache
-import os
-import pandas as pd
+import asyncio
+import aiohttp
 
-requests_cache.install_cache('dataverse_cache', expire_after=3600) # 1 hour
-print("\n[metadata] Caching requests")
+from aiohttp_client_cache import CachedSession, SQLiteBackend
+import logging
+from datetime import datetime
 
-def metadata_setup():
+# Setup logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.FileHandler("app/logs/metadata_fetch.log"),
+        logging.StreamHandler(),
+    ],
+)
+
+logger = logging.getLogger(__name__)
+
+# Install cache only once - guard against multiple imports
+if not hasattr(requests_cache, '_dataverse_cache_installed'):
+    requests_cache.install_cache("dataverse_cache", expire_after=3600)  # 1 hour
+    requests_cache._dataverse_cache_installed = True
+    logger.info("Caching requests enabled")
+
+
+def metadata_setup(url_list = 'installations'):
     """Setup for gathering metadata
 
     Hard coded for now - eventually take it form instalaltions list, add as arg
 
     Parameters
     ----------
-    None
+    urls : str
+        If 'installations', pull whole list of URLs. Otherwise, input list manually.
 
     Returns
     -------
@@ -24,34 +48,33 @@ def metadata_setup():
         List of URLs containing every installation
     """
 
-    # Just hard coding for now... Will want to pull from installations list
-    # urls = [
-    #     'https://dataverse.asu.edu',
-    #     'https://dataverse.harvard.edu'
-    # ]
-
     # Load installation data to get URLs
-    installations = pd.read_parquet('app/data/installations/installations.parquet')
-    urls = installations['url'].tolist()
+    if url_list == 'installations':
+        installations = pd.read_parquet("app/data/installations/installations.parquet")
+        urls = installations["url"].tolist()
+        logger.info(f"Loaded {len(urls)} installation URLs")
+    else:
+        urls = url_list
+        logger.info(f"Loaded {len(urls)} URLs manually")
 
-    print(f"\n[metadata_setup] URL list: {urls}")
     return urls
 
-def pull_combine_save(urls, start=0, rows=1000, page_limit=10):
-    """API requests for Dataverse metadata with search API
-    
+
+def pull_combine_save(urls, start=0, per_page=1000, page_limit=10):
+    """API requests for Dataverse metadata with search API (parallel)
+
     Using list of installations, query each and get metadata with request_metadata and save as CSV and parquet
-    
+
     Parameters
     ----------
     urls : list of str
         List of URLs of Dataverse installations (including https://)
     start : int
         Record to start on for pagination
-    rows : int
-        Number of rows per query. Dataverse API limits at 1000 maybe?
+    per_page : int
+        Number of records per page. Dataverse API limits at 1000 maybe?
     page_limit : int
-        Limit the number of pages. 
+        Limit the number of pages.
 
     Returns
     -------
@@ -59,74 +82,155 @@ def pull_combine_save(urls, start=0, rows=1000, page_limit=10):
         Saves to file, does not return anything
     """
 
-    # Make dictionary of DFs
-    dfs = {
-        url_to_name(url): request_metadata(base=url, page_limit=2)
-        for url in urls
-    }
-    print(f"[metadata.pull_combine_save] DF keys: {dfs.keys()}")
+    # Run async requests in parallel
+    logger.info(f"Starting parallel metadata fetch for {len(urls)} installations")
+    start_time = datetime.now()
+    dfs = asyncio.run(fetch_all_metadata(urls, start, per_page, page_limit))
+    elapsed = (datetime.now() - start_time).total_seconds()
+    logger.info(f"Completed in {elapsed:.2f} seconds")
+    logger.info(f"Successfully fetched from {len(dfs)}/{len(urls)} installations")
 
     # Combine into single dataset
-    df = pd.concat(dfs, ignore_index=True)
+    if len(dfs) == 0:
+        logger.error("No data fetched from any installation. Nothing to save.")
+        return
+    elif len(dfs) == 1:
+        df = list(dfs.values())[0]
+    else:
+        df = pd.concat(dfs.values(), ignore_index=True)
 
-    # Save as csv and parquet
+    logger.info(f"Combined dataset: {len(df)} total records")
+
+    # Save CSV first
     paths = {
-        'csv': 'app/data/metadata/metadata.csv', 
-        'parquet': 'app/data/metadata/metadata.parquet'
+        "csv": "app/data/metadata/metadata.csv",
+        "parquet": "app/data/metadata/metadata.parquet",
     }
-    df.to_csv(paths['csv'])
-    df.to_parquet(paths['parquet'])
-    print(f"[metadata.pull_combine_save] Saved to {paths.values()}")
+    df.to_csv(paths["csv"], index=False)
+    logger.info(f"Saved CSV to {paths['csv']}")
+
+    # Prepare for parquet - convert all object columns to strings
+    df_parquet = df.copy()
+    for col in df_parquet.select_dtypes(include=['object']).columns:
+        df_parquet[col] = df_parquet[col].astype(str)
+
+    df_parquet.to_parquet(paths["parquet"], index=False)
+    logger.info(f"Saved Parquet to {paths['parquet']}")
 
 
-def request_metadata(
-    base, type=["file", "dataset", "dataverse"], start=0, rows=1000, page_limit=10
-):
-    """
-    Plan is to use this and loop through list of hosts to get all metadata
-    """
+async def fetch_all_metadata(urls, start, per_page, page_limit):
+    """Fetch metadata from all installations in parallel"""
+    logger.info(
+        f"fetch_all_metadata called with: start={start}, per_page={per_page}, page_limit={page_limit}"
+    )
+    cache = SQLiteBackend(cache_name="aiohttp_cache", expire_after=3600)
+
+    # Create SSL context that doesn't verify certificates (for problematic installations)
+    import ssl
+
+    ssl_context = ssl.create_default_context()
+    ssl_context.check_hostname = False
+    ssl_context.verify_mode = ssl.CERT_NONE
+    connector = aiohttp.TCPConnector(ssl=ssl_context)
+
+    async with CachedSession(cache=cache, connector=connector) as session:
+        tasks = [
+            request_metadata_async(
+                session=session, 
+                base=url, 
+                start=start, 
+                per_page=per_page, 
+                page_limit=page_limit
+            )
+            for url in urls
+        ]
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+
+    # Build dictionary of DFs, filtering out errors
+    dfs = {}
+    failures = []
+
+    for url, result in zip(urls, results):
+        # if result is exception, log it and put in failures list
+        if isinstance(result, Exception):
+            logger.error(
+                f"FAILED: {url} - {type(result).__name__}: {str(result)[:100]}"
+            )
+            failures.append({"url": url, "error": str(result)[:200]})
+
+        # if empty data frame, add to failures list
+        elif result.empty:
+            logger.warning(f"EMPTY: {url} - No data returned")
+            failures.append({"url": url, "error": "No data returned"})
+
+        # success, these get returned as dict of dfs
+        else:
+            logger.info(f"SUCCESS: {url} - {len(result)} records")
+            # Add column with installation name
+            result['installation'] = url_to_name(url)
+            dfs[url_to_name(url)] = result
+
+    # failure log
+    if failures:
+        failure_df = pd.DataFrame(failures)
+        failure_df["timestamp"] = datetime.now()
+        failure_df.to_csv("app/logs/failed_installations.csv", index=False)
+        logger.warning(
+            f"Logged {len(failures)} failures to app/logs/failed_installations.csv"
+        )
+
+    return dfs
 
 
-    # initial parameters
+async def request_metadata_async(session, base, file_type=['dataverse', 'dataset'], start=0, per_page=1000, page_limit=10):
+    """Async version of request_metadata"""
     page = 1
     all_items = []
 
-    print(f"\n[metadata.request_metadata] Requesting metadata for {url_to_name(base)}")
+    # type parameters - create &type=x&type=y for each type in list
+    type_params = ''.join([f'&type={t}' for t in file_type])
+
     while True:
-        # url for query
-        url = f"{base.rstrip('/')}/api/search?q=*&start={start}"
-        print(f"Query: {url}")
-
+        url = f"{base.rstrip('/')}/api/search?q=*{type_params}&start={start}&per_page={per_page}"
         try:
-            # Get items and add to json of all items
-            response = requests.get(url, timeout=15)
-            response.raise_for_status()  # error for bad status codes
-            data = response.json()
+            async with session.get(
+                url, timeout=aiohttp.ClientTimeout(total=180)
+            ) as response:
+                response.raise_for_status()
+                data = await response.json()
 
-            # Check if response has expected structure
-            if "data" not in data or "items" not in data["data"]:
-                print(f"[metadata.request_metadata] WARNING: Unexpected response structure from {base}")
-                break
+                # Check if response has expected structure
+                if "data" not in data or "items" not in data["data"]:
+                    logger.debug(f"{base}: Unexpected response structure")
+                    break
+                all_items.extend(data["data"]["items"])
 
-            all_items.extend(data["data"]["items"])
+                # See if there are more to query
+                total = data["data"]["total_count"]
+                start = start + per_page
+                page += 1
 
-            # see if there are more to query
-            total = data["data"]["total_count"]
-            start = start + rows
+                if start >= total or page > page_limit:
+                    reason = (
+                        "reached total"
+                        if start >= total
+                        else f"hit page_limit ({page} > {page_limit})"
+                    )
+                    logger.info(
+                        f"{base}: Stopping - {reason}, fetched {len(all_items)} records"
+                    )
+                    break
 
-            # reset
-            page += 1
-            if start >= total or page > page_limit:
-                break
+        except (aiohttp.ClientError, asyncio.TimeoutError) as e:
+            logger.debug(f"{base}: {type(e).__name__}")
+            raise  # Re-raise to be caught by gather
 
-        except requests.exceptions.RequestException as e:
-            print(f"[metadata.request_metadata] ERROR: Request failed for {base}: {e}")
-            break
         except json.JSONDecodeError as e:
-            print(f"[metadata.request_metadata] ERROR: Invalid JSON response from {base}: {e}")
-            break
+            logger.debug(f"{base}: JSON decode error")
+            raise  # Re-raise to be caught by gather
 
     return pd.DataFrame(all_items)
 
+
 def url_to_name(url):
-    return url.split('//')[1].split('.')[1]
+    return url.split("//")[1].split(".")[1]
