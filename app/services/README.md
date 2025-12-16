@@ -41,6 +41,13 @@ python -m app.services.metadata --cmd metadata --page-limit=300
 
 That will be enough to get all dataverses and collections (not files).
 
+To enter URLs manually:
+
+```
+python -m app.services.metadata --cmd metadata --url-list https://dataverse.uvm.edu,https://dataverse.yale.edu
+```
+
+Or does this work
 
 ## Notes
 

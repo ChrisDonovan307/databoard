@@ -60,7 +60,7 @@ def metadata_setup(url_list = 'installations'):
     return urls
 
 
-def pull_combine_save(urls, start=0, per_page=1000, page_limit=10):
+def pull_combine_save(urls, start=0, per_page=1000, page_limit=10, save=True):
     """API requests for Dataverse metadata with search API (parallel)
 
     Using list of installations, query each and get metadata with request_metadata and save as CSV and parquet
@@ -101,21 +101,23 @@ def pull_combine_save(urls, start=0, per_page=1000, page_limit=10):
 
     logger.info(f"Combined dataset: {len(df)} total records")
 
-    # Save CSV first
-    paths = {
-        "csv": "app/data/metadata/metadata.csv",
-        "parquet": "app/data/metadata/metadata.parquet",
-    }
-    df.to_csv(paths["csv"], index=False)
-    logger.info(f"Saved CSV to {paths['csv']}")
+    if save:
+        paths = {
+            "csv": "app/data/metadata/metadata.csv",
+            "parquet": "app/data/metadata/metadata.parquet",
+        }
+        df.to_csv(paths["csv"], index=False)
+        logger.info(f"Saved CSV to {paths['csv']}")
 
-    # Prepare for parquet - convert all object columns to strings
-    df_parquet = df.copy()
-    for col in df_parquet.select_dtypes(include=['object']).columns:
-        df_parquet[col] = df_parquet[col].astype(str)
+        # Prepare for parquet - convert all object columns to strings
+        df_parquet = df.copy()
+        for col in df_parquet.select_dtypes(include=['object']).columns:
+            df_parquet[col] = df_parquet[col].astype(str)
 
-    df_parquet.to_parquet(paths["parquet"], index=False)
-    logger.info(f"Saved Parquet to {paths['parquet']}")
+        df_parquet.to_parquet(paths["parquet"], index=False)
+        logger.info(f"Saved Parquet to {paths['parquet']}")
+    else: 
+        logger.info(f"Not saving any files (--save False)")
 
 
 async def fetch_all_metadata(urls, start, per_page, page_limit):
@@ -166,8 +168,9 @@ async def fetch_all_metadata(urls, start, per_page, page_limit):
         # success, these get returned as dict of dfs
         else:
             logger.info(f"SUCCESS: {url} - {len(result)} records")
-            # Add column with installation name
+            # Add column with installation name and url
             result['installation'] = url_to_name(url)
+            result['installation_url'] = url
             dfs[url_to_name(url)] = result
 
     # failure log
@@ -188,6 +191,7 @@ async def request_metadata_async(session, base, file_type=['dataverse', 'dataset
     all_items = []
 
     # type parameters - create &type=x&type=y for each type in list
+    # could probably clean this up
     type_params = ''.join([f'&type={t}' for t in file_type])
 
     while True:
@@ -199,13 +203,13 @@ async def request_metadata_async(session, base, file_type=['dataverse', 'dataset
                 response.raise_for_status()
                 data = await response.json()
 
-                # Check if response has expected structure
+                # check structure of response
                 if "data" not in data or "items" not in data["data"]:
                     logger.debug(f"{base}: Unexpected response structure")
                     break
                 all_items.extend(data["data"]["items"])
 
-                # See if there are more to query
+                # see if there are more to query
                 total = data["data"]["total_count"]
                 start = start + per_page
                 page += 1

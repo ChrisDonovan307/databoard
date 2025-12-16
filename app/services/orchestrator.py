@@ -12,7 +12,7 @@ def refresh_installations():
     save_installations_geojson(df)
     save_installations_csv(df)
 
-def refresh_metadata(start=0, per_page=1000, page_limit=2, url_list='installations'):
+def refresh_metadata(start=0, per_page=1000, page_limit=2, url_list='installations', save=True):
     """
     Using list of installations, get metadata for stored collections for each one
     """
@@ -21,11 +21,11 @@ def refresh_metadata(start=0, per_page=1000, page_limit=2, url_list='installatio
         urls,
         start=start,
         per_page=per_page,
-        page_limit=page_limit
+        page_limit=page_limit,
+        save=save
     )
 
 if __name__ == "__main__":
-    # for adding arguments
     import argparse
     parser = argparse.ArgumentParser(
         prog="Orchestrator",
@@ -75,21 +75,32 @@ if __name__ == "__main__":
             Arg input should be comma separated (dataverse,file). \
             (default: dataverse,dataset)"
     )
+    parser.add_argument(
+        "--no-save",
+        action="store_true",
+        default=True,
+        help="(metadata) Do not save parquet or csv files (default: --save)"
+    )
     args = parser.parse_args()
 
-    # Parse URL list - convert string to list if needed
+
+    ## pre parsing? post parsing
     if args.url_list == 'installations':
         url_list = 'installations'
     else:
-        # Split comma-separated URLs into list
         url_list = [url.strip() for url in args.url_list.split(',')]
+    
+    save = args.no_save == True
 
+
+    ## run commands
     if args.cmd == "metadata":
         refresh_metadata(
             start=args.start, 
             per_page=args.per_page, 
             page_limit=args.page_limit,
-            url_list=url_list
+            url_list=url_list,
+            save=save
         )
     elif args.cmd == "installations":
         refresh_installations()
@@ -99,5 +110,6 @@ if __name__ == "__main__":
             start=args.start, 
             per_page=args.per_page, 
             page_limit=args.page_limit,
-            url_list=url_list
+            url_list=url_list,
+            save=save
         )
