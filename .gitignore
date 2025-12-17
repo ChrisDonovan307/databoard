@@ -12,3 +12,6 @@ app/data/metadata/metadata.csv
 app/data/metadata_backup/metadata.csv
 
 aiohttp_cache.sqlite
+
+# logs
+app/logs/metadata_fetch.log

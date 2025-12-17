@@ -58,7 +58,7 @@ if __name__ == "__main__":
         type=str,
         default='installations',
         help="(metadata) If 'installations', uses whole set of installations. Otherwise, add them manually as list, \
-            separated by commas (https://dataverse.harvard.edu,https://dataverse.ucla.edu) \
+            separated by commas ('https://dataverse.harvard.edu,https://dataverse.ucla.edu') \
             (default: installations)"
     )
     parser.add_argument(
@@ -78,20 +78,18 @@ if __name__ == "__main__":
     parser.add_argument(
         "--no-save",
         action="store_true",
-        default=True,
+        default=False,
         help="(metadata) Do not save parquet or csv files (default: --save)"
     )
     args = parser.parse_args()
-
 
     ## pre parsing? post parsing
     if args.url_list == 'installations':
         url_list = 'installations'
     else:
         url_list = [url.strip() for url in args.url_list.split(',')]
-    
-    save = args.no_save == True
 
+    save = not args.no_save
 
     ## run commands
     if args.cmd == "metadata":

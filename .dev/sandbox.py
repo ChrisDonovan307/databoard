@@ -53,6 +53,7 @@ f"something_{type_params}_something"
 #$ explore parquet metadata -------------------
 import pandas as pd
 df = pd.read_parquet('app/data/metadata/metadata.parquet')
+# df = pd.read_parquet('app/data/metadata_backup/metadata.parquet') # backup with most installations
 df.info()
 df.columns
 

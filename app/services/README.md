@@ -30,13 +30,13 @@ Note that UVM is not on there yet. We are adding it manually with some janky met
 To run metadata service:
 
 ```
-python -m app.services.metadata --cmd metadata
+python -m app.services.orchestrator --cmd metadata
 ```
 
-This is set with page limit of 2 as a default. To pull everything:
+This is set with page limit of 2 as a default. To pull everything, add a large page limit:
 
 ```
-python -m app.services.metadata --cmd metadata --page-limit=300
+python -m app.services.orchestrator --cmd metadata --page-limit=300
 ```
 
 That will be enough to get all dataverses and collections (not files).
@@ -44,10 +44,8 @@ That will be enough to get all dataverses and collections (not files).
 To enter URLs manually:
 
 ```
-python -m app.services.metadata --cmd metadata --url-list https://dataverse.uvm.edu,https://dataverse.yale.edu
+python -m app.services.orchestrator --cmd metadata --url-list https://dataverse.uvm.edu,https://dataverse.yale.edu
 ```
-
-Or does this work
 
 ## Notes
 

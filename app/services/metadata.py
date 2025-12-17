@@ -31,7 +31,6 @@ if not hasattr(requests_cache, '_dataverse_cache_installed'):
     requests_cache._dataverse_cache_installed = True
     logger.info("Caching requests enabled")
 
-
 def metadata_setup(url_list = 'installations'):
     """Setup for gathering metadata
 
