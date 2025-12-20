@@ -12,7 +12,7 @@ def refresh_installations():
     save_installations_geojson(df)
     save_installations_csv(df)
 
-def refresh_metadata(start=0, per_page=1000, page_limit=2, url_list='installations', save=True):
+def refresh_metadata(start=0, per_page=1000, page_limit=2, url_list='installations', save=True, timeout=180):
     """
     Using list of installations, get metadata for stored collections for each one
     """
@@ -22,7 +22,8 @@ def refresh_metadata(start=0, per_page=1000, page_limit=2, url_list='installatio
         start=start,
         per_page=per_page,
         page_limit=page_limit,
-        save=save
+        save=save,
+        timeout=timeout
     )
 
 if __name__ == "__main__":
@@ -81,6 +82,12 @@ if __name__ == "__main__":
         default=False,
         help="(metadata) Do not save parquet or csv files (default: --save)"
     )
+    parser.add_argument(
+        "--timeout",
+        type=int,
+        default=180,
+        help="(metadata) Timeout length in seconds. 180 works for most, but larger dataverse still time out, like Harvard. (default: 180)"
+    )
     args = parser.parse_args()
 
     ## pre parsing? post parsing
@@ -98,7 +105,8 @@ if __name__ == "__main__":
             per_page=args.per_page, 
             page_limit=args.page_limit,
             url_list=url_list,
-            save=save
+            save=save,
+            timeout=args.timeout
         )
     elif args.cmd == "installations":
         refresh_installations()
@@ -109,5 +117,6 @@ if __name__ == "__main__":
             per_page=args.per_page, 
             page_limit=args.page_limit,
             url_list=url_list,
-            save=save
+            save=save,
+            timeout=args.timeout
         )

@@ -1,79 +1,85 @@
-from dash import html, dash_table
+from dash import html, dash_table, callback, Input, Output
 import dash
 
 import pandas as pd
 from sklearn.datasets import load_iris
 import dash_ag_grid as dag
+from dash_bootstrap_templates import ThemeSwitchAIO
 
 dash.register_page(__name__, path="/tables")
 
-# Load iris dataset
-# iris = load_iris()
-# df = pd.DataFrame(iris.data, columns=iris.feature_names)
-# df["species"] = pd.Categorical.from_codes(iris.target, iris.target_names)
+
+# df = pd.read_parquet('app/data/metadata/metadata.parquet')
+df = pd.read_parquet('app/data/clean/installation_stats.parquet')
+keep = [
+    'name',
+    'url',
+    'launch_year',
+    'country',
+    'n_datasets',
+    'n_files',
+    'n_authors',
+    'n_subjects',
+    'n_keywords',
+    'n_publishers',
+    'metrics',
+]
+df = df[keep]
+df.columns = df.columns.str.replace('_', ' ').str.title().str.replace('Url', 'URL')
 
 # column_defs = [
 #     {
-#         'field': 'sepal length (cm)', 
-#         'headerName': 'Sepal Length (cm)',
-#         'filter': 'agNumberColumnFilter', 
-#     },
-#     {
-#         'field': 'sepal width (cm)', 
-#         'filter': 'agNumberColumnFilter'
-#     },
-#     {   
-#         'field': 'petal length (cm)', 
-#         'filter': 'agNumberColumnFilter'
-#     },
-#     {
-#         'field': 'petal width (cm)', 
-#         'filter': 'agNumberColumnFilter'
-#     },
-#     {
-#         'field': 'species',
-#         'headerName': 'Species',
-#         'filter': 'agTextColumnFilter'
+#         'field': 'Name',
 #     },
 # ]
 
-# grid_options={'animateRows': False}
+default_col_def = {
+    "headerClass": "center-aligned-header", # defined in css
+    "filter": True,
+    "cellClass": "center-aligned-cell", # defined in css
+}
 
-df = pd.read_parquet('app/data/metadata/metadata.parquet')
+grid_options = {
+    # "pagination": True,
+    # "paginationAutoPageSize": True,
+}
 
 grid = dag.AgGrid(
     id='table',
     rowData=df.to_dict('records'),
-    columnDefs=[{"field": i} for i in df.columns], # shortcut 
-    # columnDefs=column_defs,
-    columnSize='sizeToFit', # widths
-    dashGridOptions=grid_options
+    columnDefs=[{"field": i} for i in df.columns], # shortcut
+    defaultColDef=default_col_def,
+    columnSize='autoSize',
+    dashGridOptions=grid_options,
+    style={"height": "100%", "width": "100%"}  # fill parent container
 )
 
-layout = html.Div(
-    [
-        # Header
+layout = html.Div([
         html.Div(
             [
-                html.H1(
-                    "Interactive Data Tables",
-                    style={"textAlign": "center", "color": "#2c3e50"},
-                ),
-                html.P(
-                    "Explore and filter the iris dataset",
-                    style={"textAlign": "center", "color": "#7f8c8d"},
-                ),
-                html.Hr(),
-            ],
-            style={"marginBottom": "30px"},
-        ),
-        # Main Content
-        html.Div(
-            [
-                html.H2("Iris Dataset Table"),
+                html.H2("Iris Dataset Table", style={"marginBottom": "15px"}),
+                html.P("Note that we are missing records for some of the biggest installations, including Harvard, UNC, and others."),
                 grid,
             ],
-            style={"maxWidth": "1200px", "margin": "0 auto", "padding": "20px"},
+            style={
+                "height": "calc(100vh - 200px)", # leave room for footer
+                "width": "100%",
+                "padding": "20px",
+                "display": "flex",
+                "flexDirection": "column"
+            },
         ),
     ]
 )
+
+
+# make table theme match global theme
+@callback(
+    Output('table', 'className'),
+    Input(ThemeSwitchAIO.ids.switch("theme"), "value")
+)
+def update_table_theme(theme_switch):
+    if theme_switch:
+        return "ag-theme-balham-dark"
+    else:
+        return "ag-theme-balham"

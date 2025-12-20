@@ -9,9 +9,12 @@ venv/*
 
 # large files we don't really need
 app/data/metadata/metadata.csv
+app/data/metadata/metadata.parquet
 app/data/metadata_backup/metadata.csv
+app/data/metadata_backup/metadata.parquet
 
 aiohttp_cache.sqlite
 
 # logs
 app/logs/metadata_fetch.log
+

@@ -12,6 +12,7 @@ app = dash.Dash(
     __name__,
     use_pages=True,
     pages_folder=os.path.join(ROOT, "app", "pages"),  # specify path to pages from root
+    assets_folder=os.path.join(ROOT, "app", "assets"),  # same with assets
     requests_pathname_prefix=PREFIX,
     routes_pathname_prefix=PREFIX,
     external_stylesheets=[dbc.themes.DARKLY],

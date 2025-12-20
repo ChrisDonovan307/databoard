@@ -59,7 +59,7 @@ def metadata_setup(url_list = 'installations'):
     return urls
 
 
-def pull_combine_save(urls, start=0, per_page=1000, page_limit=10, save=True):
+def pull_combine_save(urls, start=0, file_type=['dataverse', 'dataset'], per_page=1000, page_limit=10, save=True, timeout=180):
     """API requests for Dataverse metadata with search API (parallel)
 
     Using list of installations, query each and get metadata with request_metadata and save as CSV and parquet
@@ -84,7 +84,14 @@ def pull_combine_save(urls, start=0, per_page=1000, page_limit=10, save=True):
     # Run async requests in parallel
     logger.info(f"Starting parallel metadata fetch for {len(urls)} installations")
     start_time = datetime.now()
-    dfs = asyncio.run(fetch_all_metadata(urls, start, per_page, page_limit))
+    dfs = asyncio.run(fetch_all_metadata(
+        urls=urls, 
+        start=start, 
+        file_type=file_type,
+        per_page=per_page, 
+        page_limit=page_limit, 
+        timeout=timeout
+    ))
     elapsed = (datetime.now() - start_time).total_seconds()
     logger.info(f"Completed in {elapsed:.2f} seconds")
     logger.info(f"Successfully fetched from {len(dfs)}/{len(urls)} installations")
@@ -119,7 +126,7 @@ def pull_combine_save(urls, start=0, per_page=1000, page_limit=10, save=True):
         logger.info(f"Not saving any files (--save False)")
 
 
-async def fetch_all_metadata(urls, start, per_page, page_limit):
+async def fetch_all_metadata(urls, start, file_type, per_page, page_limit, timeout):
     """Fetch metadata from all installations in parallel"""
     logger.info(
         f"fetch_all_metadata called with: start={start}, per_page={per_page}, page_limit={page_limit}"
@@ -139,9 +146,11 @@ async def fetch_all_metadata(urls, start, per_page, page_limit):
             request_metadata_async(
                 session=session, 
                 base=url, 
+                file_type=file_type,
                 start=start, 
                 per_page=per_page, 
-                page_limit=page_limit
+                page_limit=page_limit,
+                timeout=timeout
             )
             for url in urls
         ]
@@ -184,7 +193,7 @@ async def fetch_all_metadata(urls, start, per_page, page_limit):
     return dfs
 
 
-async def request_metadata_async(session, base, file_type=['dataverse', 'dataset'], start=0, per_page=1000, page_limit=10):
+async def request_metadata_async(session, base, file_type=['dataverse', 'dataset'], start=0, per_page=1000, page_limit=10, timeout=180):
     """Async version of request_metadata"""
     page = 1
     all_items = []
@@ -197,7 +206,7 @@ async def request_metadata_async(session, base, file_type=['dataverse', 'dataset
         url = f"{base.rstrip('/')}/api/search?q=*{type_params}&start={start}&per_page={per_page}"
         try:
             async with session.get(
-                url, timeout=aiohttp.ClientTimeout(total=180)
+                url, timeout=aiohttp.ClientTimeout(total=timeout)
             ) as response:
                 response.raise_for_status()
                 data = await response.json()
