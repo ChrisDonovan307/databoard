@@ -4,16 +4,16 @@
 	import { onMount } from 'svelte';
 
 	let { children } = $props();
-	let theme = $state('autumn');
+	let theme = $state('emerald');
 
 	onMount(() => {
 		const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-		theme = prefersDark ? 'dim' : 'autumn';
+		theme = prefersDark ? 'dim' : 'emerald';
 		document.documentElement.setAttribute('data-theme', theme);
 	});
 
 	function toggleTheme() {
-		theme = theme === 'dim' ? 'autumn' : 'dim';
+		theme = theme === 'dim' ? 'emerald' : 'dim';
 		document.documentElement.setAttribute('data-theme', theme);
 	}
 </script>
@@ -24,12 +24,10 @@
 
 <div class="navbar bg-base-100 shadow-sm">
   <div class="flex-1">
-    <a class="btn btn-ghost text-xl">Databoard</a>
+    <a href="/" class="btn btn-ghost text-xl">Databoard</a>
   </div>
 	<div class="flex gap-1">
-		🌙
-		<input type="checkbox" class="toggle" onclick={toggleTheme}/>
-		☀️
+		🌙<input type="checkbox" class="toggle" onclick={toggleTheme}/>☀️
 	</div>
   <div class="flex-none">
     <ul class="menu menu-horizontal px-1">

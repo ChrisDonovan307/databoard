@@ -9,7 +9,9 @@ npm run dev
 
 ## Back End
 
+```sh
+# from root
+flask --app backend.api run
 ```
-cd backend
-flask run
-```
+
+Serving at `localhost:5173/databoard/`. Everything prefixed by `/databoard` for Silk deployment.

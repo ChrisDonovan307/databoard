@@ -8,6 +8,11 @@ export default defineConfig({
         tailwindcss(),
         sveltekit()
     ],
+	server: {
+		proxy: {
+			'/databoard/api': 'http://localhost:5000'
+		}
+	},
 	test: {
 		expect: { requireAssertions: true },
 		projects: [
