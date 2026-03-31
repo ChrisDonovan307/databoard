@@ -4,7 +4,7 @@
 	import { onMount } from 'svelte';
 
 	let { children } = $props();
-	let theme = $state('emerald');
+	let theme = $state('dim');
 
 	onMount(() => {
 		const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
