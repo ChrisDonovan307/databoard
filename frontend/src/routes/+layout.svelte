@@ -20,6 +20,7 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
 </svelte:head>
 
 <div class="navbar bg-base-100 shadow-sm">
@@ -31,7 +32,7 @@
 	</div>
   <div class="flex-none">
     <ul class="menu menu-horizontal px-1">
-      <li><a>Link</a></li>
+      <li><a href="/databoard/map">Map</a></li>
       <li>
         <details>
           <summary>Parent</summary>
