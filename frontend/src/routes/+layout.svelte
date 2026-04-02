@@ -23,7 +23,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
 </svelte:head>
 
-<div class="navbar bg-base-100 shadow-sm">
+<div class="navbar bg-base-100 shadow-sm min-h-0 h-14">
   <div class="flex-1">
     <a href="/" class="btn btn-ghost text-xl">Databoard</a>
   </div>
