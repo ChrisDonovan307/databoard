@@ -1,9 +1,16 @@
 <script lang="ts">
 	import { MapLibre, Marker, Popup } from 'svelte-maplibre';
+
 	let { data } = $props();
     let hoveredName: string | null = $state(null);
+    let selectedName: string | null = $state(null);
+    let inst = $derived(
+        data.installations.features.find(({ properties }) => properties.name === selectedName) ?? null
+    );
+
     $effect(() => {
         console.log(data.installations)
+        console.log(inst)
     })
 </script>
 
@@ -14,7 +21,10 @@
                 <h2 class="card-title">Card Title</h2>
                 <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
                 <div class="card-actions justify-end">
-                    <a class="styled-link" href="https://dataverse.harvard.edu/" target="_blank">Harvard Dataverse</a>
+                    <a class="styled-link" href="https://dataverse.harvard.edu/" target="_blank">
+                        Harvard Dataverse
+                        <i class="fa-solid fa-link"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -33,6 +43,7 @@
                         class="marker-btn"
                         onmouseenter={() => hoveredName = properties.name}
                         onmouseleave={() => hoveredName = null}
+                        onclick={() => selectedName = properties.name}
                         title="marker"
                     >
                         <i class="fa-solid fa-location-pin"></i>
@@ -46,7 +57,18 @@
     </div>
 
     <div class="col-span-4">
-        <div class="card"></div>
+        <div class="card">
+            {#if inst}
+                <div class="card-body">
+                    <h2 class="card-title">{inst?.properties.name}</h2>
+                    <ul>
+                        <li>{inst?.properties.country}, {inst?.properties.launch_year}</li>
+                        <li><strong>Description:</strong> {inst?.properties.description}</li>
+                        <li><strong>URL:</strong> <a class="inline-link" href={inst?.properties.hostname}>{inst?.properties.hostname}</a></li>
+                    </ul>
+                </div>
+            {/if}
+        </div>
     </div>
 
     <div class="col-span-4">
@@ -57,15 +79,6 @@
         <div class="card"></div>
     </div>
 </div>
-
-<!-- <div>
-	{#each data.installations.features as { geometry, properties }}
-		<p><b>{properties.name}</b>:</p>
-		<p class="ml-2">lat {geometry.coordinates[1]}, lon {geometry.coordinates[0]}</p>
-		<p class="ml-2">Country: {properties.country}</p>
-		<p class="ml-2">url: {properties.url}</p>
-	{/each}
-</div> -->
 
 <style>
 	:global(.map) {
@@ -81,7 +94,7 @@
 		padding: 0;
 	}
     i {
-        color: #1f3c22;
+        color: var(--color-green-950);
         opacity: 0.75;
     }
     .container {
@@ -95,12 +108,23 @@
         height: 100%;
         background-color: var(--color-olive-100);
         color: var(--color-taupe-800);
+        overflow-y: scroll;
 	}
+    .inline-link {
+        color: var(--color-taupe-800);
+        cursor: pointer;
+    }
+    .inline-link:hover {
+        color: var(--color-green-700)
+    }
     .styled-link {
         background-color: var(--color-gray-300);
         border-radius: 5px;
         border: 1px solid black;
         padding: 5px 10px;
         color: var(--color-taupe-800);
+    }
+    .styled-link:hover {
+        background-color: var(--color-taupe-500);
     }
 </style>

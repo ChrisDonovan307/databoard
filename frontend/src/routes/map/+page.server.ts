@@ -1,6 +1,21 @@
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
+interface InstallationProperties {
+    name: string;
+    country: string;
+    description: string;
+    doi_authority: string;
+    hostname: string;
+    launch_year: string;
+    metrics: boolean;
+    url: string;
+}
+
+interface InstallationsGeoJSON {
+    features: { geometry: { coordinates: [number, number] }; properties: InstallationProperties }[];
+}
+
 const FLASK_URL = process.env.FLASK_URL ?? 'http://localhost:5000/databoard';
 
 export const load: PageServerLoad = async ({ fetch }) => {
@@ -17,6 +32,6 @@ export const load: PageServerLoad = async ({ fetch }) => {
         throw error(res.status, `Bad response from Flask (${res.status}): ${body}`);
     }
 
-    const installations = await res.json();
+    const installations = await res.json() as InstallationsGeoJSON;
     return { installations };
 };
