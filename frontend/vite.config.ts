@@ -8,6 +8,9 @@ export default defineConfig({
         tailwindcss(),
         sveltekit()
     ],
+	ssr: {
+		noExternal: ['svelte-maplibre']
+	},
 	server: {
 		proxy: {
 			'/databoard/api': 'http://localhost:5000'
