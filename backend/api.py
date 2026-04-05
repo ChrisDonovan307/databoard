@@ -8,7 +8,7 @@ def create_app():
     # CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}}) # svelte dev server
 
     for blueprint in blueprints:
-        app.register_blueprint(blueprint, url_prefix="/databoard")
+        app.register_blueprint(blueprint)
 
     return app
 
