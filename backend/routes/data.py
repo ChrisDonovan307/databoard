@@ -1,7 +1,6 @@
 from flask import Blueprint, jsonify
 import pandas as pd
 import json
-import os
 
 data = Blueprint('data', __name__)
 

@@ -4,5 +4,22 @@
 	import { Colors } from 'chart.js';
 </script>
 
-<h2>Detail page</h2>
+<main class="m-4">
+	<h2>Detail</h2>
+	<p>To do:</p>
+	<ul>
+		<li>Breakdowns by subject</li>
+		<li>Trends over time</li>
+	</ul>
+</main>
 
+<style>
+	ul {
+		display: block;
+		list-style-type: disc;
+		margin-top: 0.5rem;
+		margin-bottom: 0.5rem;
+		margin-right: 0;
+		padding-left: 1.5rem;
+	}
+</style>
