@@ -12,21 +12,7 @@ interface InstallationProperties {
     url: string;
 }
 
-interface dataverses {
-    rowId: number;
-    country: string;
-    type: string;
-    identifier: string;
-    publishedAt: string;
-    installation: string;
-    installationUrl: string;
-    imageUrl: string;
-    publicationStatuses: string;
-    affiliation: string;
-    parentDataverseName: string;
-    parentDataverseIdentifer: string;
-    datasetCount: number;
-}
+type DatasetsByInstallation = { installation: string; count: number }[];
 
 interface InstallationsGeoJSON {
     features: { geometry: { coordinates: [number, number] }; properties: InstallationProperties }[];
@@ -34,12 +20,15 @@ interface InstallationsGeoJSON {
 
 const FLASK_URL = process.env.FLASK_URL ?? 'http://localhost:5000/databoard';
 
-export const load: PageServerLoad = async ({ fetch }) => {
+export const load: PageServerLoad = async ({ fetch, setHeaders }) => {
+    setHeaders({ 'cache-control': 'max-age=300' });
+
     let instRes, dvRes;
+
     try {
         [instRes, dvRes] = await Promise.all([
             fetch(`${FLASK_URL}/api/installations`),
-            fetch(`${FLASK_URL}/api/dataverses`)
+            fetch(`${FLASK_URL}/api/datasets-by-installation`)
         ]);
     } catch (e) {
         throw error(503, `Cannot reach Flask: ${e instanceof Error ? e.message : e}`);
@@ -55,6 +44,6 @@ export const load: PageServerLoad = async ({ fetch }) => {
     }
 
     const installations = await instRes.json() as InstallationsGeoJSON;
-    const dataverses = await dvRes.json() as dataverses[];
+    const dataverses = await dvRes.json() as DatasetsByInstallation;
     return { installations, dataverses };
 };

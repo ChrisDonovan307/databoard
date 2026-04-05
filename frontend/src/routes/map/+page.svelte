@@ -15,52 +15,55 @@
 	);
 
 	// Set up graph
+	let canvas: HTMLCanvasElement;
 	let chartInstance: Chart | null = null;
 
 	$effect(() => {
-		themeState.value; // track 
+		themeState.value; // track
 
-		requestAnimationFrame(() => {
-			const canvas = document.getElementById('chart') as HTMLCanvasElement;
-			if (!canvas) return;
+		// Use theme colors so they change with light/dark
+		const style = getComputedStyle(document.documentElement);
+		const chartColors = {
+			bar: style.getPropertyValue('--color-primary').trim(),
+			text: style.getPropertyValue('--color-base-content').trim(), // includes legend
+			axis: style.getPropertyValue('--color-base-content').trim(),
+		};
 
-			const style = getComputedStyle(document.documentElement);
-			const chartColors = {
-				bar: style.getPropertyValue('--color-primary').trim(),
-				legend: style.getPropertyValue('--color-base-content').trim(),
-				axis: style.getPropertyValue('--color-base-content').trim(),
-			};
-
-			const countsByInstallation = Object.fromEntries(
-				Object.entries(
-					data.dataverses.reduce((acc: Record<string, number>, dv) => {
-						acc[dv.installation] = (acc[dv.installation] ?? 0) + dv.datasetCount;
-						return acc;
-					}, {})
-				).slice(0, 12)
-			);
-
-			console.log(countsByInstallation);
-
-			chartInstance?.destroy();
-			chartInstance = new Chart(canvas, {
-				type: 'bar',
-				data: {
-					labels: Object.keys(countsByInstallation),
-					datasets: [{
-						label: 'Datasets per installation',
-						data: Object.values(countsByInstallation),
-						backgroundColor: chartColors.bar
-					}]
+		chartInstance?.destroy();
+		Chart.defaults.color = chartColors.text;
+		chartInstance = new Chart(canvas, {
+			type: 'bar',
+			data: {
+				labels: data.dataverses.map(d => d.installation),
+				datasets: [{
+					label: 'Datasets',
+					data: data.dataverses.map(d => d.count),
+					backgroundColor: chartColors.bar
+				}]
+			},
+			options: {
+				color: chartColors.text,
+				scales: {
+					x: { 
+						ticks: { color: chartColors.axis },
+						title: { display: true, text: 'Dataverse' }
+					},
+					y: { 
+						ticks: { color: chartColors.axis },
+						title: { display: true, text: 'Number of Datasets' }
+					}
 				},
-				options: {
-					color: chartColors.legend,
-					scales: {
-						x: { ticks: { color: chartColors.axis } },
-						y: { ticks: { color: chartColors.axis } }
+				plugins: {
+					title: {
+						display: true,
+						text: "Datasets per Dataverse",
+						color: chartColors.text
+					},
+					legend: {
+						display: false
 					}
 				}
-			});
+			}
 		});
 	});
 </script>
@@ -102,8 +105,13 @@
 					>
 						<i class="fa-solid fa-location-pin"></i>
 					</button>
-					<Popup open={hoveredName === properties.name} offset={[0, -10]}>
-						<div class="text-lg text-black">{properties.name}</div>
+					<Popup open = { hoveredName === properties.name } offset={[0, -10]}>
+						<div id="popup">
+							<h3>{properties.name}</h3>
+							<p><span>Established:</span><span>{properties.launch_year}</span></p>
+							<p><span>DOI Authority:</span><span>{properties.doi_authority}</span></p>
+							<p><span>Metrics API:</span><span>{properties.metrics === true ? 'Yes' : 'No'}</span></p>
+						</div>
 					</Popup>
 				</Marker>
 			{/each}
@@ -130,7 +138,8 @@
 	</div>
 
 	<div class="col-span-4">
-		<div class="card"><canvas id="chart"></canvas></div>
+		<!-- Bind canvas to this inside of $effect -->
+		<div class="card"><canvas bind:this={canvas}></canvas></div>
 	</div>
 
 	<div class="col-span-4">
@@ -139,6 +148,10 @@
 </div>
 
 <style>
+	.container {
+		height: calc(100vh - (var(--spacing) * 22));
+		width: calc(100vw - (var(--spacing) * 8));
+	}
 	:global(.map) {
 		height: 100%;
 		width: 100%;
@@ -155,10 +168,21 @@
 		color: var(--color-green-950);
 		opacity: 0.75;
 	}
-	.container {
-		height: calc(100vh - (var(--spacing) * 22));
-		width: calc(100vw - (var(--spacing) * 8));
+	#popup {
+		max-width: 300px;
+		h3 {
+			font-weight: bold;
+		}
+		h3, p {
+			color: var(--color-gray-900);
+		}
+		p {
+			display: flex;
+			justify-content: space-between;
+			gap: 1rem;
+		}
 	}
+
 	:global(.card) {
 		border-radius: 6px;
 		border: var(--border) solid var(--color-base-100);
@@ -169,11 +193,11 @@
 		overflow-y: scroll;
 	}
 	.inline-link {
-		color: var(--color-taupe-800);
+		color: var(--color-secondary);
 		cursor: pointer;
 	}
 	.inline-link:hover {
-		color: var(--color-green-700);
+		text-decoration: underline;
 	}
 	.styled-link {
 		background-color: var(--color-gray-300);
