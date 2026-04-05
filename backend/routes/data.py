@@ -44,4 +44,12 @@ def get_dataverses():
 def get_datasets_by_installation():
     return jsonify(_datasets_by_installation_cache)
 
+@data.route("/api/installations-by-country")
+def get_installations_by_country():
+    df = pd.read_csv('data/installations/installations.csv', usecols=['country'])
+    result = df['country'].value_counts().reset_index()
+    result.columns = ['country', 'count']
+    result.sort_values('count', ascending=False, inplace=True)
+    return result.to_dict(orient='records')
+    
 blueprints = [data]
