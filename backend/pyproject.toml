@@ -1,0 +1,19 @@
+[project]
+name = "databoard"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dotenv>=0.9.9",
+    "requests>=2.32.5",
+]
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["win-64"]
+
+[tool.pixi.pypi-dependencies]
+databoard = { path = ".", editable = true }
+
+[tool.pixi.tasks]

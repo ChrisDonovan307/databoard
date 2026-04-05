@@ -3,10 +3,6 @@ venv/*
 .env
 *__pycache__*
 
-# pixi environments
-.pixi/*
-!.pixi/config.toml
-
 # large files we don't really need
 app/data/metadata/metadata.csv
 app/data/metadata/metadata.parquet
@@ -18,3 +14,4 @@ aiohttp_cache.sqlite
 # logs
 app/logs/metadata_fetch.log
 
+node_modules/*

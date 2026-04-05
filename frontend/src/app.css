@@ -1,0 +1,26 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+    themes: dim --default, emerald;
+}
+
+/* This works but looks like it doesnt */
+@theme inline {
+  --color-test: oklch(0.72 0.11 178);
+}
+
+/* Add to existing themes */
+[data-theme="dim"] {
+  --color-gray: #888888;
+}
+
+[data-theme="emerald"] {
+  --color-gray: #888888;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
