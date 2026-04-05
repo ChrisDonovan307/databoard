@@ -1,6 +1,6 @@
 from flask import Flask
 # from flask_cors import CORS
-from .routes import blueprints
+from routes import blueprints
 
 def create_app():
     app = Flask(__name__)
@@ -15,4 +15,4 @@ def create_app():
 app = create_app()
 
 if __name__ == '__main__':
-	app.run(debug=True)
+	app.run(debug=False)
