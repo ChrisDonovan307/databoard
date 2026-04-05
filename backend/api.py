@@ -1,14 +1,17 @@
 from flask import Flask
-# from flask_cors import CORS
-from routes import blueprints
+from backend.routes import blueprints
+from dotenv import load_dotenv
+import os
 
 def create_app():
     app = Flask(__name__)
     app.secret_key = "change-me"
-    # CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}}) # svelte dev server
+
+    load_dotenv()
+    url_prefix = '/databoard' if os.getenv('ENV') == 'development' else ''
 
     for blueprint in blueprints:
-        app.register_blueprint(blueprint)
+        app.register_blueprint(blueprint, url_prefix=url_prefix)
 
     return app
 
