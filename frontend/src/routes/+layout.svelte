@@ -1,20 +1,15 @@
 <script lang="ts">
 	import favicon from '$lib/assets/favicon.svg';
 	import "../app.css"
-	import { onMount } from 'svelte';
+	import { base } from '$app/paths';
+
+	import { themeState } from '$lib/theme.svelte';
 
 	let { children } = $props();
-	let theme = $state('dim');
-
-	onMount(() => {
-		const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-		theme = prefersDark ? 'dim' : 'emerald';
-		document.documentElement.setAttribute('data-theme', theme);
-	});
 
 	function toggleTheme() {
-		theme = theme === 'dim' ? 'emerald' : 'dim';
-		document.documentElement.setAttribute('data-theme', theme);
+		themeState.value = themeState.value === 'dim' ? 'emerald' : 'dim';
+		document.documentElement.setAttribute('data-theme', themeState.value);
 	}
 </script>
 
@@ -25,7 +20,7 @@
 
 <div class="navbar bg-base-100 shadow-sm min-h-0 h-14">
   <div class="flex-1">
-    <a href="/" class="btn btn-ghost text-xl">Databoard</a>
+    <a href="{base}/" class="btn btn-ghost text-xl">Databoard</a>
   </div>
 	<div class="flex gap-1">
 		🌙<input type="checkbox" class="toggle" onclick={toggleTheme}/>☀️
