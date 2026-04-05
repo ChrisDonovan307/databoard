@@ -7,7 +7,7 @@
 
 	let { data } = $props();
 
-	// Map interactinos
+	// Map interactions
 	let hoveredName: string | null = $state(null);
 	let selectedName: string | null = $state(null);
 	let inst = $derived(
@@ -15,37 +15,52 @@
 	);
 
 	// Set up graph
-	const graphColor = getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim();
-	const graphTextColor = getComputedStyle(document.documentElement).getPropertyValue('--color-base-content').trim();
 	let chartInstance: Chart | null = null;
 
 	$effect(() => {
-		const canvas = document.getElementById('chart') as HTMLCanvasElement;
-		if (!canvas) return;
+		themeState.value; // track 
 
-		const countsByInstallation = data.dataverses.reduce((acc: Record<string, number>, dv) => {
-			acc[dv.installation] = (acc[dv.installation] ?? 0) + dv.datasetCount;
-			return acc;
-		}, {});
+		requestAnimationFrame(() => {
+			const canvas = document.getElementById('chart') as HTMLCanvasElement;
+			if (!canvas) return;
 
-		chartInstance?.destroy();
-		chartInstance = new Chart(canvas, {
-			type: 'bar',
-			data: {
-				labels: Object.keys(countsByInstallation),
-				datasets: [{
-					label: 'Datasets per installation',
-					data: Object.values(countsByInstallation),
-					backgroundColor: graphColor
-				}]
-			},
-			options: {
-				color: graphTextColor,
-				scales: {
-					x: { ticks: { color: graphTextColor } },
-					y: { ticks: { color: graphTextColor } }
+			const style = getComputedStyle(document.documentElement);
+			const chartColors = {
+				bar: style.getPropertyValue('--color-primary').trim(),
+				legend: style.getPropertyValue('--color-base-content').trim(),
+				axis: style.getPropertyValue('--color-base-content').trim(),
+			};
+
+			const countsByInstallation = Object.fromEntries(
+				Object.entries(
+					data.dataverses.reduce((acc: Record<string, number>, dv) => {
+						acc[dv.installation] = (acc[dv.installation] ?? 0) + dv.datasetCount;
+						return acc;
+					}, {})
+				).slice(0, 12)
+			);
+
+			console.log(countsByInstallation);
+
+			chartInstance?.destroy();
+			chartInstance = new Chart(canvas, {
+				type: 'bar',
+				data: {
+					labels: Object.keys(countsByInstallation),
+					datasets: [{
+						label: 'Datasets per installation',
+						data: Object.values(countsByInstallation),
+						backgroundColor: chartColors.bar
+					}]
+				},
+				options: {
+					color: chartColors.legend,
+					scales: {
+						x: { ticks: { color: chartColors.axis } },
+						y: { ticks: { color: chartColors.axis } }
+					}
 				}
-			}
+			});
 		});
 	});
 </script>

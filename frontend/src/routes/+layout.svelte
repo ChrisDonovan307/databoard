@@ -3,13 +3,13 @@
 	import "../app.css"
 	import { base } from '$app/paths';
 
+  // themeState as $state
 	import { themeState } from '$lib/theme.svelte';
 
 	let { children } = $props();
 
 	function toggleTheme() {
 		themeState.value = themeState.value === 'dim' ? 'emerald' : 'dim';
-		document.documentElement.setAttribute('data-theme', themeState.value);
 	}
 </script>
 
@@ -21,14 +21,17 @@
 <div class="navbar bg-base-100 shadow-sm min-h-0 h-14">
   <div class="flex-1">
     <a href="{base}/" class="btn btn-ghost text-xl">Databoard</a>
+    <ul class="menu menu-horizontal px-1">
+      <li><a href="/databoard/map">Map</a></li>
+      <li><a href="/databoard/detail">Detail</a></li>
+    </ul>
   </div>
 	<div class="flex gap-1">
 		🌙<input type="checkbox" class="toggle" onclick={toggleTheme}/>☀️
 	</div>
-  <div class="flex-none">
-    <ul class="menu menu-horizontal px-1">
-      <li><a href="/databoard/map">Map</a></li>
-      <li>
+  <!-- <div class="flex-none"> -->
+    <!-- <ul class="menu menu-horizontal px-1"> -->
+      <!-- <li>
         <details>
           <summary>Parent</summary>
           <ul class="bg-base-100 rounded-t-none p-2">
@@ -36,9 +39,9 @@
             <li><a>Link 2</a></li>
           </ul>
         </details>
-      </li>
-    </ul>
-  </div>
+      </li> -->
+    <!-- </ul> -->
+  <!-- </div> -->
 </div>
 
 {@render children()}
