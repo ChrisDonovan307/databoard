@@ -1,5 +1,13 @@
 # Databoard
 
+This is a work in progress to explore datasets across installations of the [Dataverse Project](https://dataverse.org/). It might eventually be worth looking at but is certainly not yet. The bare bones platform can be found here for now: [https://cdonov12.w3.uvm.edu/databoard](https://cdonov12.w3.uvm.edu/databoard).
+
+Various links:
+
+* [Dataverse Project](https://dataverse.org/)
+* [Dataverse User Guide](https://guides.dataverse.org/en/latest/user/index.html)
+* [UVM Dataverse](https://dataverse.uvm.edu/)
+
 ## Development
 
 Clone:
@@ -9,19 +17,19 @@ git clone https://www.github.com/ChrisDonovan307/databoard.git
 cd databoard
 ```
 
-Set up backend environment:
+Set up Flask API:
 
 ```sh
 cd backend && uv sync && cd ..
 ```
 
-Set up frontend environment
+Set up SvelteKit front end: 
 
 ```sh
 cd frontend && npm install && cd ..
 ```
 
-To run development, there is a `run.sh` script that will launch front and back ends.
+To run development, there is a `run.sh` script that will launch front and back ends in one window.
 
 ```sh
 chmod +x run.sh
@@ -29,6 +37,21 @@ chmod +x run.sh
 ```
 
 Defaults to `localhost:5173/databoard`
+
+## Deploy
+
+Build: 
+
+```sh
+npm run build
+```
+
+Hosting on Silk:
+
+```sh
+silk app $host/api load
+silk app $host/databoard load
+```
 
 ## Project Structure
 

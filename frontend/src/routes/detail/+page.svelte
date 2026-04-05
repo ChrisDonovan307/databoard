@@ -1,15 +1,10 @@
-<script lang="ts">
-	import { Chart } from 'chart.js/auto';
-	import { themeState } from '$lib/theme.svelte';
-	import { Colors } from 'chart.js';
-</script>
-
 <main class="m-4">
 	<h2>Detail</h2>
-	<p>To do:</p>
+	<p>Things that might be interesting:</p>
 	<ul>
-		<li>Breakdowns by subject</li>
-		<li>Trends over time</li>
+		<li>Breakdowns by subject, across all and within each</li>
+		<li>Trends in publication, citation, and downloads over time, across all and within each</li>
+		<li>How are license use, data format, and software availability associated with citation and download counts</li>
 	</ul>
 </main>
 
