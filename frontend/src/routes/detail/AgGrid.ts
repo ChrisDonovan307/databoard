@@ -9,7 +9,7 @@ import {
 } from "ag-grid-community";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
-
+const myTheme = themeQuartz
 
 export function initGrid(container: HTMLElement, rowData: Record<string, unknown>[]) {
     const columnDefs = Object.keys(rowData[0] ?? {}).map((field) => ({ field }));
@@ -17,7 +17,7 @@ export function initGrid(container: HTMLElement, rowData: Record<string, unknown
     return createGrid(
         container,
         {
-            // theme: myTheme,
+            theme: myTheme,
             rowData,
             columnDefs,
             defaultColDef: { 
