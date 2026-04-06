@@ -1,10 +1,16 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { initGrid } from './AgGrid';
-	let gridContainer: HTMLElement;
+	import { initGrid } from './AgGrid.ts';
+	import { colorSchemeDarkWarm, colorSchemeLightWarm } from 'ag-grid-community';
+	import { themeState } from '$lib/theme.svelte';
 
-	onMount(() => {
-		initGrid(gridContainer);
+	let gridContainer: HTMLElement;
+	let { data } = $props();
+
+	console.log(themeState);
+
+	$effect(() => {
+	 	initGrid(gridContainer, data.dataverses);
 	});
 </script>
 
@@ -16,7 +22,7 @@
 		<li>Trends in publication, citation, and downloads over time, across all and within each</li>
 		<li>How are license use, data format, and software availability associated with citation and download counts</li>
 	</ul>
-	<div id="detailgrid" bind:this={gridContainer} style="height: 400px;"></div>
+	<div bind:this={gridContainer} class="h-125"></div>
 </main>
 
 <style>
