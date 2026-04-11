@@ -16,7 +16,8 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		paths: {
-			base: '/databoard'
+			base: ''
+            //base: '/databoard'
 		}
 	}
 };
