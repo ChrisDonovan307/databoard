@@ -11,7 +11,7 @@
 
 <div class="navbar bg-(--color-base-300) shadow-sm min-h-0 h-14">
   <div class="flex-1">
-    <a href="{base}/" class="btn btn-ghost text-xl">Databoard</a>
+    <a href="/databoard" class="btn btn-ghost text-xl">Databoard</a>
     <ul class="menu menu-horizontal px-1">
       <li><a href="/databoard/detail">Detail</a></li>
     </ul>

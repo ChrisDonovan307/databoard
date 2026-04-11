@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Map from './Map.svelte';
-	import BarChart from './BarChart.svelte';
+	import Map from '../Map.svelte';
+	import BarChart from '../BarChart.svelte';
 
 	let { data } = $props();
 
