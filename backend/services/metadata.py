@@ -18,7 +18,7 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler("app/logs/metadata_fetch.log"),
+        logging.FileHandler("logs/metadata_fetch.log"),
         logging.StreamHandler(),
     ],
 )

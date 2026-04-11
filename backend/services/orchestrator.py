@@ -1,5 +1,5 @@
-from app.services.installations import * 
-from app.services.metadata import * 
+from services.installations import * 
+from services.metadata import * 
 
 def refresh_installations():
     """
