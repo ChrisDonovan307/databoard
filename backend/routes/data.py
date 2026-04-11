@@ -24,26 +24,26 @@ _installations_cache = _load_installations()
 _dataverses_cache = _load_dataverses()
 _datasets_by_installation_cache = _load_datasets_by_installation()
 
-@data.route("/api/items")
+@data.route("/items")
 def get_items():
     return jsonify([
         {"id": 1, "name": "Jeff"},
         {"id": 2, "name": "Bill"}
     ])
 
-@data.route("/api/installations")
+@data.route("/installations")
 def get_installations():
     return jsonify(_installations_cache)
 
-@data.route("/api/dataverses")
+@data.route("/dataverses")
 def get_dataverses():
     return jsonify(_dataverses_cache)
 
-@data.route("/api/datasets-by-installation")
+@data.route("/datasets-by-installation")
 def get_datasets_by_installation():
     return jsonify(_datasets_by_installation_cache)
 
-@data.route("/api/installations-by-country")
+@data.route("/installations-by-country")
 def get_installations_by_country():
     df = pd.read_csv('data/installations/installations.csv', usecols=['country'])
     result = df['country'].value_counts().reset_index()

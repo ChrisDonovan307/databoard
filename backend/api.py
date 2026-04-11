@@ -8,7 +8,7 @@ def create_app():
     app.secret_key = "change-me"
 
     load_dotenv()
-    url_prefix = '/databoard' if os.getenv('ENV') == 'development' else ''
+    url_prefix = '/databoard/api' if os.getenv('ENV') == 'development' else ''
 
     for blueprint in blueprints:
         app.register_blueprint(blueprint, url_prefix=url_prefix)

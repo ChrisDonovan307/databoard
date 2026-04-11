@@ -18,7 +18,7 @@
 	<div class="col-span-3 row-span-1">
 		<div class="card">
 			<div class="card-body">
-				<h2 class="card-title">More Things</h2>
+				<!-- <h2 class="card-title">More Things</h2> -->
 				<div>
 					<p>Things that might be interesting:</p>
 					<ul>
@@ -43,7 +43,6 @@
 	<div class="col-span-3 row-span-1">
 		<div class="card">
 			<div class="card-body">
-				<h2 class="card-title">Even More Things</h2>
 				<div>
 				</div>
 				<div class="card-actions justify-end"></div>
