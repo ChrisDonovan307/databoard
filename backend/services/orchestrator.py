@@ -1,16 +1,8 @@
+import argparse
+
 from services.installations import * 
 from services.metadata import * 
 
-def refresh_installations():
-    """
-    Refresh all installations data: fetch from API, save as JSON, parquet, and GeoJSON
-    """
-    res = get_installations()
-    save_installations_json(res)
-    df = get_installations_df(res)
-    save_installations_parquet(df)
-    save_installations_geojson(df)
-    save_installations_csv(df)
 
 def refresh_metadata(start=0, per_page=1000, page_limit=2, url_list='installations', save=True, timeout=180):
     """
@@ -26,8 +18,8 @@ def refresh_metadata(start=0, per_page=1000, page_limit=2, url_list='installatio
         timeout=timeout
     )
 
-if __name__ == "__main__":
-    import argparse
+
+def parse_args():
     parser = argparse.ArgumentParser(
         prog="Orchestrator",
         description="Run sets of functions to refresh metadata from Dataverse with API calls."
@@ -56,7 +48,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--url-list",
-        type=str,
+        type=lambda s: s if s == 'installations' else [u.strip() for u in s.split(',')],
         default='installations',
         help="(metadata) If 'installations', uses whole set of installations. Otherwise, add them manually as list, \
             separated by commas ('https://dataverse.harvard.edu,https://dataverse.ucla.edu') \
@@ -88,35 +80,23 @@ if __name__ == "__main__":
         default=180,
         help="(metadata) Timeout length in seconds. 180 works for most, but larger dataverse still time out, like Harvard. (default: 180)"
     )
-    args = parser.parse_args()
+    return parser.parse_args()
 
-    ## pre parsing? post parsing
-    if args.url_list == 'installations':
-        url_list = 'installations'
-    else:
-        url_list = [url.strip() for url in args.url_list.split(',')]
 
-    save = not args.no_save
-
-    ## run commands
-    if args.cmd == "metadata":
+def main():
+    args = parse_args()
+    if args.cmd in ('installations', 'all'):
+        Installation().call()
+    if args.cmd in ('metadata', 'all'):
         refresh_metadata(
-            start=args.start, 
-            per_page=args.per_page, 
+            start=args.start,
+            per_page=args.per_page,
             page_limit=args.page_limit,
-            url_list=url_list,
-            save=save,
-            timeout=args.timeout
+            url_list=args.url_list,
+            save=not args.no_save,
+            timeout=args.timeout,
         )
-    elif args.cmd == "installations":
-        refresh_installations()
-    elif args.cmd == 'all':
-        refresh_installations()
-        refresh_metadata(
-            start=args.start, 
-            per_page=args.per_page, 
-            page_limit=args.page_limit,
-            url_list=url_list,
-            save=save,
-            timeout=args.timeout
-        )
+
+
+if __name__ == "__main__":
+    main()
