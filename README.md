@@ -1,6 +1,6 @@
 # Databoard
 
-This is a work in progress to explore datasets across installations of the [Dataverse Project](https://dataverse.org/). It might eventually be worth looking at but is certainly not yet. The bare bones platform can be found here for now: [https://cdonov12.w3.uvm.edu/databoard](https://cdonov12.w3.uvm.edu/databoard).
+This is a work in progress to explore datasets across installations of the [Dataverse Project](https://dataverse.org/). It might eventually be worth looking at but is certainly not yet.
 
 Various links:
 
