@@ -1,3 +1,4 @@
+from pathlib import Path
 import json
 import os
 
@@ -12,6 +13,31 @@ import aiohttp
 from aiohttp_client_cache import CachedSession, SQLiteBackend
 import logging
 from datetime import datetime
+
+# class Metadata:
+#     def __init__(
+#         self, 
+#         start=0, 
+#         per_page=1000, 
+#         page_limit=2, 
+#         url_list='installations', 
+#         file_type=None, 
+#         save=True, 
+#         timeout=180, 
+#         data_dir="data"
+#     ):
+#         self.config = { ... } 
+#         self.data_dir = Path(data_dir)                                                 
+                                            
+#     def refresh(self):                                                                 
+#         urls = self._setup_urls()                                                      
+#         dfs = asyncio.run(self._fetch_all(urls))                                       
+#         self._combine_and_save(dfs)                                                    
+                                                                                        
+    # def _setup_urls(self):
+    # async def _fetch_all(self, urls):
+    # async def _fetch_one(self, session, url):
+    # def _combine_and_save(self, dfs):
 
 # Setup logging
 logging.basicConfig(

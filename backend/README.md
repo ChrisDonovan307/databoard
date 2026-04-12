@@ -5,13 +5,13 @@ Heap of scripts to get Dataverse installation info and use it to download metada
 Get help:
 
 ```
-python -m app.services.orchestrator --help
+python -m services.orchestrator --help
 ```
 
 Run everything:
 
 ```
-python -m app.services.orchestrator --cmd all
+python -m services.orchestrator --cmd all
 ```
 
 
@@ -20,7 +20,7 @@ python -m app.services.orchestrator --cmd all
 Pull a JSON file of Dataverse installations from the [Dataverse Installation Map](https://iqss.github.io/dataverse-installations/), which actually takes the file from [here](https://raw.githubusercontent.com/IQSS/dataverse-installations/main/data/data.json)
 
 ```
-python -m app.services.orchestrator --cmd installations
+python -m services.orchestrator --cmd installations
 ```
 
 Note that UVM is not on there yet. We are adding it manually with some janky metadata in the process.
@@ -30,13 +30,13 @@ Note that UVM is not on there yet. We are adding it manually with some janky met
 To run metadata service:
 
 ```
-python -m app.services.orchestrator --cmd metadata
+python -m services.orchestrator --cmd metadata
 ```
 
 This is set with page limit of 2 as a default. To pull everything, add a large page limit:
 
 ```
-python -m app.services.orchestrator --cmd metadata --page-limit=300
+python -m services.orchestrator --cmd metadata --page-limit=300
 ```
 
 That will be enough to get all dataverses and collections (not files).
@@ -44,7 +44,7 @@ That will be enough to get all dataverses and collections (not files).
 To enter URLs manually:
 
 ```
-python -m app.services.orchestrator --cmd metadata --url-list https://dataverse.uvm.edu,https://dataverse.yale.edu
+python -m services.orchestrator --cmd metadata --url-list https://dataverse.uvm.edu,https://dataverse.yale.edu
 ```
 
 ## Notes
