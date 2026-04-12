@@ -3,3 +3,119 @@
 2026-04-11 22:54:48,318 - INFO - Caching requests enabled
 2026-04-11 22:54:56,307 - INFO - Caching requests enabled
 2026-04-11 22:55:01,024 - INFO - Caching requests enabled
+2026-04-12 10:39:19,976 - INFO - Caching requests enabled
+2026-04-12 10:39:55,489 - INFO - Caching requests enabled
+2026-04-12 10:40:45,951 - INFO - Caching requests enabled
+2026-04-12 10:41:43,133 - INFO - Caching requests enabled
+2026-04-12 10:41:43,140 - INFO - Loaded 140 installation URLs
+2026-04-12 10:43:58,403 - INFO - Caching requests enabled
+2026-04-12 10:43:58,404 - INFO - Loaded 1 URLs manually
+2026-04-12 10:43:58,404 - INFO - Starting parallel metadata fetch for 1 installations
+2026-04-12 10:43:58,404 - INFO - fetch called with: start=0, per_page=1000, page_limit=2
+2026-04-12 10:43:59,384 - INFO - https://dataverse.uvm.edu: Stopping - reached total, fetched 63 records
+2026-04-12 10:43:59,388 - INFO - SUCCESS: https://dataverse.uvm.edu - 63 records
+2026-04-12 10:43:59,391 - INFO - Completed in 0.99 seconds
+2026-04-12 10:43:59,391 - INFO - Successfully fetched from 1/1 installations
+2026-04-12 10:43:59,391 - INFO - Combined dataset: 63 total records
+2026-04-12 10:44:21,930 - INFO - Caching requests enabled
+2026-04-12 10:44:21,931 - INFO - Loaded 1 URLs manually
+2026-04-12 10:44:21,931 - INFO - Starting parallel metadata fetch for 1 installations
+2026-04-12 10:44:21,931 - INFO - fetch called with: start=0, per_page=1000, page_limit=2
+2026-04-12 10:44:21,953 - INFO - https://dataverse.uvm.edu: Stopping - reached total, fetched 63 records
+2026-04-12 10:44:21,955 - INFO - SUCCESS: https://dataverse.uvm.edu - 63 records
+2026-04-12 10:44:21,957 - INFO - Completed in 0.03 seconds
+2026-04-12 10:44:21,957 - INFO - Successfully fetched from 1/1 installations
+2026-04-12 10:44:21,957 - INFO - Combined dataset: 63 total records
+2026-04-12 10:44:21,961 - INFO - Saved CSV to data/metadata/metadata.csv
+2026-04-12 10:45:23,777 - INFO - Caching requests enabled
+2026-04-12 10:45:23,778 - INFO - Loaded 1 URLs manually
+2026-04-12 10:45:23,778 - INFO - Starting parallel metadata fetch for 1 installations
+2026-04-12 10:45:23,779 - INFO - fetch called with: start=0, per_page=1000, page_limit=2
+2026-04-12 10:45:23,800 - INFO - https://dataverse.uvm.edu: Stopping - reached total, fetched 63 records
+2026-04-12 10:45:23,811 - INFO - SUCCESS: https://dataverse.uvm.edu - 63 records
+2026-04-12 10:45:23,813 - INFO - Completed in 0.03 seconds
+2026-04-12 10:45:23,813 - INFO - Successfully fetched from 1/1 installations
+2026-04-12 10:45:23,813 - INFO - Combined dataset: 63 total records
+2026-04-12 10:45:23,817 - INFO - Saved CSV to data/metadata/metadata.csv
+2026-04-12 10:45:23,845 - INFO - Saved Parquet to data/metadata/metadata.parquet
+2026-04-12 10:51:22,200 - INFO - Caching requests enabled
+2026-04-12 10:51:25,132 - INFO - Loaded 1 URLs manually
+2026-04-12 10:51:25,132 - INFO - Starting parallel metadata fetch for 1 installations
+2026-04-12 10:51:25,132 - INFO - fetch called with: start=0, per_page=1000, page_limit=2
+2026-04-12 10:51:25,881 - INFO - https://dataverse.uvm.edu: Stopping - reached total, fetched 63 records
+2026-04-12 10:51:25,888 - INFO - SUCCESS: https://dataverse.uvm.edu - 63 records
+2026-04-12 10:51:25,891 - INFO - Completed in 0.76 seconds
+2026-04-12 10:51:25,891 - INFO - Successfully fetched from 1/1 installations
+2026-04-12 10:51:25,891 - INFO - Combined dataset: 63 total records
+2026-04-12 10:52:37,283 - INFO - Loaded 1 URLs manually
+2026-04-12 10:52:37,283 - INFO - Starting parallel metadata fetch for 1 installations
+2026-04-12 10:52:37,283 - INFO - fetch called with: start=0, per_page=1000, page_limit=2
+2026-04-12 10:52:37,298 - INFO - https://dataverse.uvm.edu: Stopping - reached total, fetched 63 records
+2026-04-12 10:52:37,300 - INFO - SUCCESS: https://dataverse.uvm.edu - 63 records
+2026-04-12 10:52:37,302 - INFO - Completed in 0.02 seconds
+2026-04-12 10:52:37,303 - INFO - Successfully fetched from 1/1 installations
+2026-04-12 10:52:37,303 - INFO - Combined dataset: 63 total records
+2026-04-12 10:52:49,261 - INFO - Loaded 1 URLs manually
+2026-04-12 10:52:49,261 - INFO - Starting parallel metadata fetch for 1 installations
+2026-04-12 10:52:49,262 - INFO - fetch called with: start=0, per_page=1000, page_limit=2
+2026-04-12 10:52:49,282 - INFO - https://dataverse.uvm.edu: Stopping - reached total, fetched 63 records
+2026-04-12 10:52:49,284 - INFO - SUCCESS: https://dataverse.uvm.edu - 63 records
+2026-04-12 10:52:49,286 - INFO - Completed in 0.02 seconds
+2026-04-12 10:52:49,287 - INFO - Successfully fetched from 1/1 installations
+2026-04-12 10:52:49,287 - INFO - Combined dataset: 63 total records
+2026-04-12 10:52:58,722 - INFO - Loaded 1 URLs manually
+2026-04-12 10:52:58,722 - INFO - Starting parallel metadata fetch for 1 installations
+2026-04-12 10:52:58,722 - INFO - fetch called with: start=0, per_page=1000, page_limit=2
+2026-04-12 10:52:58,744 - INFO - https://dataverse.uvm.edu: Stopping - reached total, fetched 63 records
+2026-04-12 10:52:58,746 - INFO - SUCCESS: https://dataverse.uvm.edu - 63 records
+2026-04-12 10:52:58,749 - INFO - Completed in 0.03 seconds
+2026-04-12 10:52:58,749 - INFO - Successfully fetched from 1/1 installations
+2026-04-12 10:52:58,749 - INFO - Combined dataset: 63 total records
+2026-04-12 10:55:02,768 - INFO - Loaded 1 URLs manually
+2026-04-12 10:55:02,769 - INFO - Starting parallel metadata fetch for 1 installations
+2026-04-12 10:55:02,769 - INFO - fetch called with: start=0, per_page=1000, page_limit=2
+2026-04-12 10:55:03,148 - ERROR - FAILED: https://dataverse.uvm.edu - ClientResponseError: 400, message='Bad Request', url='https://dataverse.uvm.edu/api/search?q=*&type=d&type=a&type=t&type=
+2026-04-12 10:55:39,380 - INFO - Loaded 1 URLs manually
+2026-04-12 10:55:39,380 - INFO - Starting parallel metadata fetch for 1 installations
+2026-04-12 10:55:39,381 - INFO - fetch called with: start=0, per_page=1000, page_limit=2
+2026-04-12 10:55:39,440 - ERROR - FAILED: https://dataverse.uvm.edu - ClientResponseError: 400, message='Bad Request', url='https://dataverse.uvm.edu/api/search?q=*&type=d&type=a&type=t&type=
+2026-04-12 10:55:44,879 - INFO - Loaded 1 URLs manually
+2026-04-12 10:55:44,880 - INFO - Starting parallel metadata fetch for 1 installations
+2026-04-12 10:55:44,880 - INFO - fetch called with: start=0, per_page=1000, page_limit=2
+2026-04-12 10:55:44,935 - ERROR - FAILED: https://dataverse.uvm.edu - ClientResponseError: 400, message='Bad Request', url='https://dataverse.uvm.edu/api/search?q=*&type=d&type=a&type=t&type=
+2026-04-12 10:57:03,537 - INFO - Loaded 1 URLs manually
+2026-04-12 10:57:03,537 - INFO - Starting parallel metadata fetch for 1 installations
+2026-04-12 10:57:03,537 - INFO - fetch called with: start=0, per_page=1000, page_limit=2
+2026-04-12 10:57:03,696 - ERROR - FAILED: https://dataverse.uvm.edu - ClientResponseError: 400, message='Bad Request', url='https://dataverse.uvm.edu/api/search?q=*&type=d&type=a&type=t&type=
+2026-04-12 10:57:03,702 - WARNING - Logged 1 failures to logs/failed_installations.csv
+2026-04-12 10:57:03,704 - INFO - Completed in 0.17 seconds
+2026-04-12 10:57:03,704 - INFO - Successfully fetched from 0/1 installations
+2026-04-12 10:57:03,704 - ERROR - No data fetched from any installation. Nothing to save.
+2026-04-12 10:57:24,853 - INFO - Loaded 1 URLs manually
+2026-04-12 10:57:24,853 - INFO - Starting parallel metadata fetch for 1 installations
+2026-04-12 10:57:24,854 - INFO - fetch called with: start=0, per_page=1000, page_limit=2
+2026-04-12 10:57:24,942 - ERROR - FAILED: https://dataverse.uvm.edu - ClientResponseError: 400, message='Bad Request', url='https://dataverse.uvm.edu/api/search?q=*&type=datasets&start=0&per_
+2026-04-12 10:57:24,945 - WARNING - Logged 1 failures to logs/failed_installations.csv
+2026-04-12 10:57:24,947 - INFO - Completed in 0.09 seconds
+2026-04-12 10:57:24,947 - INFO - Successfully fetched from 0/1 installations
+2026-04-12 10:57:24,947 - ERROR - No data fetched from any installation. Nothing to save.
+2026-04-12 10:57:57,611 - INFO - Loaded 1 URLs manually
+2026-04-12 10:57:57,611 - INFO - Starting parallel metadata fetch for 1 installations
+2026-04-12 10:57:57,612 - INFO - fetch called with: start=0, per_page=1000, page_limit=2
+2026-04-12 10:57:58,338 - INFO - https://dataverse.uvm.edu: Stopping - reached total, fetched 58 records
+2026-04-12 10:57:58,342 - INFO - SUCCESS: https://dataverse.uvm.edu - 58 records
+2026-04-12 10:57:58,346 - INFO - Completed in 0.73 seconds
+2026-04-12 10:57:58,346 - INFO - Successfully fetched from 1/1 installations
+2026-04-12 10:57:58,346 - INFO - Combined dataset: 58 total records
+2026-04-12 10:57:58,349 - INFO - Saved CSV to /home/cdonovan/repos/databoard/backend/data/metadata/metadata.csv
+2026-04-12 10:57:58,361 - INFO - Saved Parquet to /home/cdonovan/repos/databoard/backend/data/metadata/metadata.parquet
+2026-04-12 10:59:06,097 - INFO - Loaded 1 URLs manually
+2026-04-12 10:59:06,097 - INFO - Starting parallel metadata fetch for 1 installations
+2026-04-12 10:59:06,098 - INFO - fetch called with: start=0, per_page=1000, page_limit=2
+2026-04-12 10:59:06,116 - INFO - https://dataverse.uvm.edu: Stopping - reached total, fetched 58 records
+2026-04-12 10:59:06,119 - INFO - SUCCESS: https://dataverse.uvm.edu - 58 records
+2026-04-12 10:59:06,121 - INFO - Completed in 0.02 seconds
+2026-04-12 10:59:06,121 - INFO - Successfully fetched from 1/1 installations
+2026-04-12 10:59:06,121 - INFO - Combined dataset: 58 total records
+2026-04-12 10:59:06,123 - INFO - Saved CSV to /home/cdonovan/repos/databoard/backend/data/metadata/metadata.csv
+2026-04-12 10:59:06,130 - INFO - Saved Parquet to /home/cdonovan/repos/databoard/backend/data/metadata/metadata.parquet

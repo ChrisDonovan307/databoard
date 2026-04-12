@@ -1,3 +1,0 @@
-# Loaded through config.py, used in installations.py
-installations_url: https://raw.githubusercontent.com/IQSS/dataverse-installations/main/data/data.json
-response_path: app/data/installations/response.json

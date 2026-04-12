@@ -4,21 +4,6 @@ from services.installations import *
 from services.metadata import * 
 
 
-def refresh_metadata(start=0, per_page=1000, page_limit=2, url_list='installations', save=True, timeout=180):
-    """
-    Using list of installations, get metadata for stored collections for each one
-    """
-    urls = metadata_setup(url_list=url_list)
-    pull_combine_save(
-        urls,
-        start=start,
-        per_page=per_page,
-        page_limit=page_limit,
-        save=save,
-        timeout=timeout
-    )
-
-
 def parse_args():
     parser = argparse.ArgumentParser(
         prog="Orchestrator",
@@ -88,14 +73,14 @@ def main():
     if args.cmd in ('installations', 'all'):
         Installation().call()
     if args.cmd in ('metadata', 'all'):
-        refresh_metadata(
+        Metadata(
             start=args.start,
             per_page=args.per_page,
             page_limit=args.page_limit,
             url_list=args.url_list,
             save=not args.no_save,
             timeout=args.timeout,
-        )
+        ).call()
 
 
 if __name__ == "__main__":

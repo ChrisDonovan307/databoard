@@ -38,6 +38,13 @@ chmod +x run.sh
 
 Defaults to `localhost:5173/databoard`
 
+Format with black:
+
+```python
+black backend
+```
+
+
 ## Deploy
 
 Build: 

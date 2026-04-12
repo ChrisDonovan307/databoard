@@ -44,7 +44,7 @@ That will be enough to get all dataverses and collections (not files).
 To enter URLs manually:
 
 ```
-python -m services.orchestrator --cmd metadata --url-list https://dataverse.uvm.edu,https://dataverse.yale.edu
+python -m services.orchestrator --cmd metadata --file-type datasets --url-list https://dataverse.uvm.edu,https://dataverse.yale.edu
 ```
 
 ## Notes
