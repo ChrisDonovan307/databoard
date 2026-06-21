@@ -142,3 +142,160 @@
 2026-06-21 14:54:40,639 - INFO - Context impl SQLiteImpl.
 2026-06-21 14:54:40,639 - INFO - Will assume non-transactional DDL.
 2026-06-21 14:55:00,461 - INFO - Caching requests enabled
+2026-06-21 15:15:15,556 - INFO - Caching requests enabled
+2026-06-21 15:15:41,070 - INFO - Caching requests enabled
+2026-06-21 15:17:30,204 - INFO - Caching requests enabled
+2026-06-21 15:18:22,473 - INFO - Caching requests enabled
+2026-06-21 15:18:31,159 - INFO - Caching requests enabled
+2026-06-21 15:18:31,177 - INFO - Context impl SQLiteImpl.
+2026-06-21 15:18:31,177 - INFO - Will assume non-transactional DDL.
+2026-06-21 15:18:32,444 - INFO - Caching requests enabled
+2026-06-21 15:18:32,489 - INFO - Context impl SQLiteImpl.
+2026-06-21 15:18:32,489 - INFO - Will assume non-transactional DDL.
+2026-06-21 15:18:34,134 - INFO - Caching requests enabled
+2026-06-21 15:18:34,162 - INFO - Context impl SQLiteImpl.
+2026-06-21 15:18:34,162 - INFO - Will assume non-transactional DDL.
+2026-06-21 15:18:35,817 - INFO - Caching requests enabled
+2026-06-21 15:18:35,848 - INFO - Context impl SQLiteImpl.
+2026-06-21 15:18:35,848 - INFO - Will assume non-transactional DDL.
+2026-06-21 15:18:36,994 - INFO - Context impl SQLiteImpl.
+2026-06-21 15:18:36,994 - INFO - Will assume non-transactional DDL.
+2026-06-21 15:18:37,012 - INFO - Context impl SQLiteImpl.
+2026-06-21 15:18:37,012 - INFO - Will assume non-transactional DDL.
+2026-06-21 15:19:48,668 - INFO - Caching requests enabled
+2026-06-21 15:20:21,380 - INFO - Caching requests enabled
+2026-06-21 15:22:02,173 - INFO - Caching requests enabled
+2026-06-21 15:34:08,192 - INFO - Caching requests enabled
+2026-06-21 15:34:45,664 - INFO - Caching requests enabled
+2026-06-21 15:34:45,684 - INFO - Context impl SQLiteImpl.
+2026-06-21 15:34:45,684 - INFO - Will assume non-transactional DDL.
+2026-06-21 15:34:46,863 - INFO - Caching requests enabled
+2026-06-21 15:34:46,913 - INFO - Context impl SQLiteImpl.
+2026-06-21 15:34:46,914 - INFO - Will assume non-transactional DDL.
+2026-06-21 15:34:48,550 - INFO - Caching requests enabled
+2026-06-21 15:34:48,576 - INFO - Context impl SQLiteImpl.
+2026-06-21 15:34:48,576 - INFO - Will assume non-transactional DDL.
+2026-06-21 15:34:50,275 - INFO - Caching requests enabled
+2026-06-21 15:34:50,301 - INFO - Context impl SQLiteImpl.
+2026-06-21 15:34:50,301 - INFO - Will assume non-transactional DDL.
+2026-06-21 15:34:51,722 - INFO - Context impl SQLiteImpl.
+2026-06-21 15:34:51,722 - INFO - Will assume non-transactional DDL.
+2026-06-21 15:34:51,737 - INFO - Context impl SQLiteImpl.
+2026-06-21 15:34:51,738 - INFO - Will assume non-transactional DDL.
+2026-06-21 15:35:26,321 - INFO - Caching requests enabled
+2026-06-21 15:40:18,395 - INFO - Caching requests enabled
+2026-06-21 15:43:09,356 - INFO - Caching requests enabled
+2026-06-21 15:45:36,090 - INFO - Caching requests enabled
+2026-06-21 15:45:53,353 - INFO - Caching requests enabled
+2026-06-21 15:45:53,373 - INFO - Context impl SQLiteImpl.
+2026-06-21 15:45:53,373 - INFO - Will assume non-transactional DDL.
+2026-06-21 15:45:54,464 - INFO - Caching requests enabled
+2026-06-21 15:45:54,506 - INFO - Context impl SQLiteImpl.
+2026-06-21 15:45:54,506 - INFO - Will assume non-transactional DDL.
+2026-06-21 15:45:56,270 - INFO - Caching requests enabled
+2026-06-21 15:45:56,296 - INFO - Context impl SQLiteImpl.
+2026-06-21 15:45:56,296 - INFO - Will assume non-transactional DDL.
+2026-06-21 15:45:58,050 - INFO - Caching requests enabled
+2026-06-21 15:45:58,079 - INFO - Context impl SQLiteImpl.
+2026-06-21 15:45:58,079 - INFO - Will assume non-transactional DDL.
+2026-06-21 15:45:59,610 - INFO - Context impl SQLiteImpl.
+2026-06-21 15:45:59,610 - INFO - Will assume non-transactional DDL.
+2026-06-21 15:45:59,630 - INFO - Context impl SQLiteImpl.
+2026-06-21 15:45:59,630 - INFO - Will assume non-transactional DDL.
+2026-06-21 15:47:46,302 - INFO - Caching requests enabled
+2026-06-21 15:59:10,990 - INFO - Caching requests enabled
+2026-06-21 15:59:31,652 - INFO - Caching requests enabled
+2026-06-21 16:01:14,183 - INFO - Caching requests enabled
+2026-06-21 16:01:14,228 - INFO - Caching requests enabled
+2026-06-21 16:01:14,250 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:01:14,250 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:01:15,422 - INFO - Caching requests enabled
+2026-06-21 16:01:15,451 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:01:15,451 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:01:16,706 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:01:16,706 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:01:16,719 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:01:16,719 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:01:29,731 - INFO - Caching requests enabled
+2026-06-21 16:01:29,749 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:01:29,749 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:01:30,872 - INFO - Caching requests enabled
+2026-06-21 16:01:30,899 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:01:30,899 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:01:32,201 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:01:32,202 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:01:32,217 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:01:32,217 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:05:49,168 - INFO - Caching requests enabled
+2026-06-21 16:07:26,637 - INFO - Caching requests enabled
+2026-06-21 16:08:14,656 - INFO - Caching requests enabled
+2026-06-21 16:08:27,281 - INFO - Caching requests enabled
+2026-06-21 16:08:27,302 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:08:27,302 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:08:28,498 - INFO - Caching requests enabled
+2026-06-21 16:08:28,546 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:08:28,547 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:08:30,354 - INFO - Caching requests enabled
+2026-06-21 16:08:30,383 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:08:30,383 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:08:32,050 - INFO - Caching requests enabled
+2026-06-21 16:08:32,081 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:08:32,081 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:08:33,175 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:08:33,175 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:08:33,194 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:08:33,194 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:12:59,785 - INFO - Caching requests enabled
+2026-06-21 16:14:18,600 - INFO - Caching requests enabled
+2026-06-21 16:14:51,069 - INFO - Caching requests enabled
+2026-06-21 16:14:51,089 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:14:51,089 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:14:52,198 - INFO - Caching requests enabled
+2026-06-21 16:14:52,242 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:14:52,242 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:14:54,028 - INFO - Caching requests enabled
+2026-06-21 16:14:54,057 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:14:54,057 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:14:55,812 - INFO - Caching requests enabled
+2026-06-21 16:14:55,839 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:14:55,840 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:14:57,135 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:14:57,136 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:14:57,151 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:14:57,151 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:16:16,253 - INFO - Caching requests enabled
+2026-06-21 16:16:33,750 - INFO - Caching requests enabled
+2026-06-21 16:16:33,770 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:16:33,770 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:16:34,907 - INFO - Caching requests enabled
+2026-06-21 16:16:34,946 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:16:34,946 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:16:36,574 - INFO - Caching requests enabled
+2026-06-21 16:16:36,601 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:16:36,601 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:16:38,426 - INFO - Caching requests enabled
+2026-06-21 16:16:38,456 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:16:38,457 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:16:39,772 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:16:39,772 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:16:39,787 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:16:39,788 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:16:59,470 - INFO - Caching requests enabled
+2026-06-21 16:17:51,655 - INFO - Caching requests enabled
+2026-06-21 16:18:04,051 - INFO - Caching requests enabled
+2026-06-21 16:18:04,070 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:18:04,070 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:18:05,164 - INFO - Caching requests enabled
+2026-06-21 16:18:05,222 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:18:05,222 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:18:06,785 - INFO - Caching requests enabled
+2026-06-21 16:18:06,814 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:18:06,814 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:18:08,453 - INFO - Caching requests enabled
+2026-06-21 16:18:08,481 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:18:08,481 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:18:09,672 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:18:09,672 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:18:09,692 - INFO - Context impl SQLiteImpl.
+2026-06-21 16:18:09,692 - INFO - Will assume non-transactional DDL.
+2026-06-21 16:18:24,859 - INFO - Caching requests enabled

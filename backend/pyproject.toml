@@ -25,6 +25,7 @@ dependencies = [
     "click==8.3.1",
     "cramjam==2.11.0",
     "dagster>=1.13.10",
+    "dagster-dg-cli>=1.13.10",
     "dagster-webserver>=1.13.10",
     "dnspython==2.8.0",
     "dotenv==0.9.9",
@@ -66,3 +67,9 @@ dependencies = [
     "wrapt==1.17.3",
     "yarl==1.23.0",
 ]
+
+[tool.dg]
+directory_type = "project"
+
+[tool.dg.project]
+root_module = "pipeline"

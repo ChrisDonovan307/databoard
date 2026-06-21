@@ -14,4 +14,15 @@ aiohttp_cache.sqlite
 # logs
 app/logs/metadata_fetch.log
 
+# node
 node_modules/*
+
+# dagster
+backend/pipeline/history/
+backend/pipeline/logs/
+backend/pipeline/.logs_queue
+backend/pipeline/.nux
+backend/pipeline/schedules/
+backend/pipeline/storage/
+backend/pipeline/.telemetry/
+backend/pipeline/dagster_home/

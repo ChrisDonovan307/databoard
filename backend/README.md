@@ -14,6 +14,15 @@ Run everything:
 python -m services.orchestrator --cmd all
 ```
 
+## Dagster
+
+Root is `backend/pipeline`. Assets are persistent, found in `backend/storage`.
+
+To run from `/backend`:
+
+```
+dg dev
+```
 
 ## Installations
 

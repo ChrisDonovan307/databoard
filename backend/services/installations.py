@@ -20,34 +20,21 @@ class Installation:
             "country": "USA",
         }
 
-    def call(self):
-        self._get()
-        df = self._process()
-        self._to_geojson(df)
-
-    def _get(self):
+    def get_raw(self) -> dict:
         session = CachedSession()
         response = session.get(self.url)
-        with open(os.path.join(self.data_dir, "response.json"), "w") as f:
-            f.write(response.text)
+        return response.json()
 
-    def _process(self):
+    def process(self, raw: dict) -> pd.DataFrame:
         """Make a clean df of installations"""
-
-        # Read from json file
-        with open(os.path.join(self.data_dir, "response.json"), "r") as f:
-            res = json.load(f)
-        df = pd.DataFrame(res["installations"])
-
+        df = pd.DataFrame(raw["installations"])
         # Add UVM to list
         df.loc[len(df)] = self.uvm
-
         # Add url column
         df["url"] = "https://" + df["hostname"]
-
         return df
 
-    def _to_geojson(self, df: pd.DataFrame):
+    def save_geojson(self, df: pd.DataFrame):
         """Take a DF of installations data and saves a GeoJSON"""
         features = []
         for _, row in df.iterrows():
