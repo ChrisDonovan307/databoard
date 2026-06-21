@@ -48,6 +48,7 @@ class Metadata:
         file_type: list[str] | None = None,
         save: bool = True,
         timeout: int = 180,
+        file_name: str = "metadata",
         data_dir: Path = ROOT / "data" / "metadata",
     ):
         self.start = start
@@ -58,7 +59,8 @@ class Metadata:
             file_type if file_type is not None else ["dataverse", "dataset"]
         )
         self.save = save
-        self.timeout = timeout
+        self.timeout: int = timeout
+        self.file_name: str = file_name
         self.data_dir = Path(data_dir)
         self.urls = self._get_urls()
 
@@ -131,8 +133,8 @@ class Metadata:
 
         if self.save:
             paths = {
-                "csv": self.data_dir / "metadata.csv",
-                "parquet": self.data_dir / "metadata.parquet",
+                "csv": self.data_dir / (self.file_name + ".csv"),
+                "parquet": self.data_dir / (self.file_name + ".parquet"),
             }
             df.to_csv(paths["csv"], index=False)
             logger.info(f"Saved CSV to {paths['csv']}")
