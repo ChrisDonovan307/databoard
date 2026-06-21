@@ -38,10 +38,10 @@ chmod +x run.sh
 
 Defaults to `localhost:5173/databoard`
 
-Format with black:
+Format with ruff:
 
 ```python
-black backend
+uvx ruff check
 ```
 
 

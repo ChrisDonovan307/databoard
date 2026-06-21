@@ -1,11 +1,7 @@
 from pathlib import Path
 import json
-import os
-
 import pandas as pd
-from dotenv import load_dotenv
 
-import requests
 import requests_cache
 import asyncio
 import aiohttp
@@ -29,13 +25,16 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+
 def url_to_name(url):
     return url.split("//")[1].split(".")[1]
 
+
 # Install cache
-if not hasattr(requests_cache, "_dataverse_cache_installed"):
+_cache_installed = False
+if not _cache_installed:
     requests_cache.install_cache("dataverse_cache", expire_after=3600)  # 1 hour
-    requests_cache._dataverse_cache_installed = True
+    _cache_installed = True
     logger.info("Caching requests enabled")
 
 
@@ -45,7 +44,7 @@ class Metadata:
         start: int = 0,
         per_page: int = 1000,
         page_limit: int = 2,
-        url_list: str = "installations",
+        url_list: str | list[str] = "installations",
         file_type: list[str] | None = None,
         save: bool = True,
         timeout: int = 180,
@@ -55,7 +54,9 @@ class Metadata:
         self.per_page = per_page
         self.page_limit = page_limit
         self.url_list = url_list
-        self.file_type = (file_type if file_type is not None else ["dataverse", "dataset"])
+        self.file_type = (
+            file_type if file_type is not None else ["dataverse", "dataset"]
+        )
         self.save = save
         self.timeout = timeout
         self.data_dir = Path(data_dir)
@@ -68,10 +69,16 @@ class Metadata:
         """Take input arg, return URLs of installations as list of strings to call when collecting data"""
         # Load installation data to get URLs
         if self.url_list == "installations":
-            installations = pd.read_csv(ROOT / "data" / "installations" / "installations.csv")
+            installations = pd.read_csv(
+                ROOT / "data" / "installations" / "installations.csv"
+            )
             urls = installations["url"].tolist()
             logger.info(f"Loaded {len(urls)} installation URLs")
         else:
+            if not isinstance(self.url_list, list):
+                raise TypeError(
+                    "url_list must be 'installations' or a list of URL strings"
+                )
             urls = self.url_list
             logger.info(f"Loaded {len(urls)} URLs manually")
 
@@ -100,12 +107,16 @@ class Metadata:
         """
 
         # Run async requests in parallel
-        logger.info(f"Starting parallel metadata fetch for {len(self.urls)} installations")
+        logger.info(
+            f"Starting parallel metadata fetch for {len(self.urls)} installations"
+        )
         start_time = datetime.now()
         dfs = asyncio.run(self._fetch())
         elapsed = (datetime.now() - start_time).total_seconds()
         logger.info(f"Completed in {elapsed:.2f} seconds")
-        logger.info(f"Successfully fetched from {len(dfs)}/{len(self.urls)} installations")
+        logger.info(
+            f"Successfully fetched from {len(dfs)}/{len(self.urls)} installations"
+        )
 
         # Combine into single dataset
         if len(dfs) == 0:
@@ -134,8 +145,7 @@ class Metadata:
             df_parquet.to_parquet(paths["parquet"], index=False)
             logger.info(f"Saved Parquet to {paths['parquet']}")
         else:
-            logger.info(f"Not saving any files (--save False)")
-
+            logger.info("Not saving any files (--save False)")
 
     async def _fetch(self):
         """Fetch metadata from all installations in parallel"""
@@ -154,8 +164,7 @@ class Metadata:
 
         async with CachedSession(cache=cache, connector=connector) as session:
             tasks = [
-                self._request_metadata(session=session, base=url)
-                for url in self.urls
+                self._request_metadata(session=session, base=url) for url in self.urls
             ]
             results = await asyncio.gather(*tasks, return_exceptions=True)
 
@@ -165,7 +174,7 @@ class Metadata:
 
         for url, result in zip(self.urls, results):
             # if result is exception, log it and put in failures list
-            if isinstance(result, Exception):
+            if isinstance(result, BaseException):
                 logger.error(
                     f"FAILED: {url} - {type(result).__name__}: {str(result)[:100]}"
                 )
@@ -194,7 +203,6 @@ class Metadata:
             )
 
         return dfs
-
 
     async def _request_metadata(self, session, base):
         page = 1
@@ -240,7 +248,7 @@ class Metadata:
                 logger.debug(f"{base}: {type(e).__name__}")
                 raise  # Re-raise to be caught by gather
 
-            except json.JSONDecodeError as e:
+            except json.JSONDecodeError:
                 logger.debug(f"{base}: JSON decode error")
                 raise  # Re-raise to be caught by gather
 

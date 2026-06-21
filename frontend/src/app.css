@@ -1,6 +1,7 @@
 @import "tailwindcss";
+
 @plugin "daisyui" {
-    themes: dim --default, emerald;
+  themes: dim --default, emerald;
 }
 
 /* This works but looks like it doesnt */
@@ -18,9 +19,9 @@
 }
 
 h2 {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 h3 {
-    font-size: 1.25rem;
+  font-size: 1.25rem;
 }
