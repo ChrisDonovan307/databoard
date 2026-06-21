@@ -1,0 +1,9 @@
+[32m2026-06-21 14:54:39 -0400[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 2bcba73e-1ce2-49ec-a5f0-d293695fd0ec - 424546 - LOGS_CAPTURED - Capturing logs for process (pid: 424546).
+[32m2026-06-21 14:54:39 -0400[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 2bcba73e-1ce2-49ec-a5f0-d293695fd0ec - 424546 - installations - STEP_START - Started execution of step "installations".
+[32m2026-06-21 14:54:39 -0400[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 2bcba73e-1ce2-49ec-a5f0-d293695fd0ec - 424546 - installations - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
+[32m2026-06-21 14:54:39 -0400[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 2bcba73e-1ce2-49ec-a5f0-d293695fd0ec - installations - Writing file at: /home/cdonovan/repos/databoard/backend/.tmp_dagster_home_aw_xvkrv/storage/installations using PickledObjectFilesystemIOManager...
+2026-06-21 14:54:39,204 - INFO - Context impl SQLiteImpl.
+2026-06-21 14:54:39,205 - INFO - Will assume non-transactional DDL.
+[32m2026-06-21 14:54:39 -0400[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 2bcba73e-1ce2-49ec-a5f0-d293695fd0ec - 424546 - installations - ASSET_MATERIALIZATION - Materialized value installations.
+[32m2026-06-21 14:54:39 -0400[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 2bcba73e-1ce2-49ec-a5f0-d293695fd0ec - 424546 - installations - HANDLED_OUTPUT - Handled output "result" using IO manager "io_manager"
+[32m2026-06-21 14:54:39 -0400[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 2bcba73e-1ce2-49ec-a5f0-d293695fd0ec - 424546 - installations - STEP_SUCCESS - Finished execution of step "installations" in 42ms.

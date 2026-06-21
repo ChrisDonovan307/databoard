@@ -27,6 +27,8 @@ Note that UVM is not on there yet. We are adding it manually with some janky met
 
 ## Metadata Refresh
 
+This pulls both dataverses and datasets, distinguished by the `type` column. Can specify for orchestrator
+
 To run metadata service:
 
 ```

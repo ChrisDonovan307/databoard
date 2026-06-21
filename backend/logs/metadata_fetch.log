@@ -119,3 +119,26 @@
 2026-04-12 10:59:06,121 - INFO - Combined dataset: 58 total records
 2026-04-12 10:59:06,123 - INFO - Saved CSV to /home/cdonovan/repos/databoard/backend/data/metadata/metadata.csv
 2026-04-12 10:59:06,130 - INFO - Saved Parquet to /home/cdonovan/repos/databoard/backend/data/metadata/metadata.parquet
+2026-06-21 14:34:32,482 - INFO - Caching requests enabled
+2026-06-21 14:34:32,483 - INFO - Loaded 1 URLs manually
+2026-06-21 14:34:32,483 - INFO - Starting parallel metadata fetch for 1 installations
+2026-06-21 14:34:32,483 - INFO - fetch called with: start=0, per_page=1000, page_limit=2
+2026-06-21 14:34:33,039 - INFO - https://dataverse.uvm.edu: Stopping - reached total, fetched 63 records
+2026-06-21 14:34:33,046 - INFO - SUCCESS: https://dataverse.uvm.edu - 63 records
+2026-06-21 14:34:33,049 - INFO - Completed in 0.57 seconds
+2026-06-21 14:34:33,049 - INFO - Successfully fetched from 1/1 installations
+2026-06-21 14:34:33,050 - INFO - Combined dataset: 63 total records
+2026-06-21 14:34:33,057 - INFO - Saved CSV to /home/cdonovan/repos/databoard/backend/data/metadata/metadata.csv
+2026-06-21 14:34:33,088 - INFO - Saved Parquet to /home/cdonovan/repos/databoard/backend/data/metadata/metadata.parquet
+2026-06-21 14:53:45,587 - INFO - Caching requests enabled
+2026-06-21 14:54:38,031 - INFO - Caching requests enabled
+2026-06-21 14:54:38,053 - INFO - Context impl SQLiteImpl.
+2026-06-21 14:54:38,054 - INFO - Will assume non-transactional DDL.
+2026-06-21 14:54:39,155 - INFO - Caching requests enabled
+2026-06-21 14:54:39,204 - INFO - Context impl SQLiteImpl.
+2026-06-21 14:54:39,205 - INFO - Will assume non-transactional DDL.
+2026-06-21 14:54:40,624 - INFO - Context impl SQLiteImpl.
+2026-06-21 14:54:40,625 - INFO - Will assume non-transactional DDL.
+2026-06-21 14:54:40,639 - INFO - Context impl SQLiteImpl.
+2026-06-21 14:54:40,639 - INFO - Will assume non-transactional DDL.
+2026-06-21 14:55:00,461 - INFO - Caching requests enabled
