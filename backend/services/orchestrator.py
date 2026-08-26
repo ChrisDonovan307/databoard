@@ -65,6 +65,15 @@ def parse_args():
         default=180,
         help="(metadata) Timeout length in seconds. 180 works for most, but larger dataverse still time out, like Harvard. (default: 180)",
     )
+    parser.add_argument(
+        "--incremental",
+        action="store_true",
+        default=False,
+        help="(metadata) Only fetch items newer than the last successful pull per installation \
+            (tracked in data/state/last_pull.json), and append+dedupe into existing metadata \
+            files instead of overwriting. Falls back to a full pull per installation if no \
+            watermark exists yet or the filtered query fails. (default: full overwrite pull)",
+    )
     return parser.parse_args()
 
 
@@ -80,6 +89,7 @@ def main():
             url_list=args.url_list,
             save=not args.no_save,
             timeout=args.timeout,
+            incremental=args.incremental,
         ).call()
 
 

@@ -68,6 +68,9 @@ dependencies = [
     "yarl==1.23.0",
 ]
 
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
 [tool.dg]
 directory_type = "project"
 

@@ -14,6 +14,9 @@ aiohttp_cache.sqlite
 # logs
 app/logs/metadata_fetch.log
 
+# incremental pull state
+backend/data/state/
+
 # node
 node_modules/*
 
