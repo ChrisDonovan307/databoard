@@ -12,11 +12,13 @@ def parse_args():
     parser.add_argument(
         "--cmd",
         required=True,
-        choices=["installations", "metadata", "all"],
+        choices=["installations", "metadata", "sizes", "all"],
         default="all",
         help="Which set of functions to run. \
             'installations': pull list of installations from Dataverse map. \
             'metadata': use Dataverse search API to get metadata from each Dataverse, combine, and save. \
+            'sizes': cheap per_page=1 probe of each installation's total_count, saved to logs/installation_sizes.csv, \
+            to see which installations are large before running a real pull. \
             (default: all)",
     )
     parser.add_argument(
@@ -65,6 +67,29 @@ def parse_args():
         default=180,
         help="(metadata) Timeout length in seconds. 180 works for most, but larger dataverse still time out, like Harvard. (default: 180)",
     )
+    parser.add_argument(
+        "--incremental",
+        action="store_true",
+        default=False,
+        help="(metadata) Only fetch items newer than the last successful pull per installation \
+            (tracked in data/state/last_pull.json), and append+dedupe into existing metadata \
+            files instead of overwriting. Falls back to a full pull per installation if no \
+            watermark exists yet or the filtered query fails. (default: full overwrite pull)",
+    )
+    parser.add_argument(
+        "--page-delay",
+        type=float,
+        default=0.2,
+        help="(metadata) Seconds to sleep between paginated requests to the same installation, \
+            to avoid rate limiting on large installations. (default: 0.2)",
+    )
+    parser.add_argument(
+        "--max-retries",
+        type=int,
+        default=3,
+        help="(metadata) Max retry attempts per page on HTTP 429/5xx responses, with exponential \
+            backoff (honors Retry-After if present). (default: 3)",
+    )
     return parser.parse_args()
 
 
@@ -72,6 +97,8 @@ def main():
     args = parse_args()
     if args.cmd in ("installations", "all"):
         Installation().call()
+    if args.cmd == "sizes":
+        Metadata(url_list=args.url_list, timeout=args.timeout).probe_and_save_sizes()
     if args.cmd in ("metadata", "all"):
         Metadata(
             start=args.start,
@@ -80,6 +107,9 @@ def main():
             url_list=args.url_list,
             save=not args.no_save,
             timeout=args.timeout,
+            incremental=args.incremental,
+            page_delay=args.page_delay,
+            max_retries=args.max_retries,
         ).call()
 
 

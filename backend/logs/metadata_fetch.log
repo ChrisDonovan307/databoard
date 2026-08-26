@@ -353,3 +353,33 @@
 2026-06-21 16:54:02,018 - INFO - Context impl SQLiteImpl.
 2026-06-21 16:54:02,018 - INFO - Will assume non-transactional DDL.
 2026-06-21 16:56:15,467 - INFO - Caching requests enabled
+2026-09-04 19:55:10,326 - INFO - Caching requests enabled
+2026-09-04 19:56:08,022 - INFO - Caching requests enabled
+2026-09-04 20:08:06,996 - INFO - Caching requests enabled
+2026-09-04 20:10:04,151 - INFO - Caching requests enabled
+2026-09-04 20:10:04,152 - INFO - Loaded 1 URLs manually
+2026-09-04 20:10:04,152 - INFO - Starting parallel metadata fetch for 1 installations
+2026-09-04 20:10:04,152 - INFO - fetch called with: start=0, per_page=1000, page_limit=2
+2026-09-04 20:10:11,742 - INFO - https://dataverse.yale.edu: Stopping - reached total, fetched 401 records
+2026-09-04 20:10:11,750 - INFO - SUCCESS: https://dataverse.yale.edu - 401 records
+2026-09-04 20:10:11,753 - INFO - Completed in 7.60 seconds
+2026-09-04 20:10:11,753 - INFO - Successfully fetched from 1/1 installations
+2026-09-04 20:10:11,754 - INFO - Combined dataset: 401 total records
+2026-09-04 20:10:11,769 - INFO - Saved CSV to /home/cdonovan/repos/databoard/backend/data/metadata/metadata.csv
+2026-09-04 20:10:11,789 - INFO - Saved Parquet to /home/cdonovan/repos/databoard/backend/data/metadata/metadata.parquet
+2026-09-04 20:24:46,087 - INFO - Caching requests enabled
+2026-09-04 20:26:59,310 - INFO - Caching requests enabled
+2026-09-04 20:26:59,311 - INFO - Loaded 2 URLs manually
+2026-09-04 20:27:00,262 - INFO - Saved installation sizes to /home/cdonovan/repos/databoard/backend/logs/installation_sizes.csv
+2026-09-04 20:27:18,993 - INFO - Caching requests enabled
+2026-09-04 20:27:37,437 - INFO - Caching requests enabled
+2026-09-04 20:27:37,437 - INFO - Loaded 1 URLs manually
+2026-09-04 20:27:37,438 - INFO - Starting parallel metadata fetch for 1 installations
+2026-09-04 20:27:37,438 - INFO - fetch called with: start=0, per_page=1000, page_limit=2
+2026-09-04 20:27:37,923 - INFO - https://dataverse.uvm.edu: Stopping - reached total, fetched 65 records
+2026-09-04 20:27:37,929 - INFO - SUCCESS: https://dataverse.uvm.edu - 65 records
+2026-09-04 20:27:37,933 - INFO - Completed in 0.49 seconds
+2026-09-04 20:27:37,933 - INFO - Successfully fetched from 1/1 installations
+2026-09-04 20:27:37,933 - INFO - Combined dataset: 65 total records
+2026-09-04 20:27:37,938 - INFO - Saved CSV to /home/cdonovan/repos/databoard/backend/data/metadata/metadata.csv
+2026-09-04 20:27:37,953 - INFO - Saved Parquet to /home/cdonovan/repos/databoard/backend/data/metadata/metadata.parquet
