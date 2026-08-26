@@ -26,3 +26,6 @@ backend/pipeline/schedules/
 backend/pipeline/storage/
 backend/pipeline/.telemetry/
 backend/pipeline/dagster_home/
+
+# managed by agents sync/add - see <agents repo>/README.md
+.claude/skills/
