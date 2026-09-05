@@ -20,6 +20,13 @@ class Installation:
             "country": "USA",
         }
 
+    def call(self):
+        """Pull installations, process, and save as CSV + GeoJSON."""
+        raw = self.get_raw()
+        df = self.process(raw)
+        self.save_csv(df)
+        self.save_geojson(df)
+
     def get_raw(self) -> dict:
         session = CachedSession()
         response = session.get(self.url)
@@ -33,6 +40,11 @@ class Installation:
         # Add url column
         df["url"] = "https://" + df["hostname"]
         return df
+
+    def save_csv(self, df: pd.DataFrame):
+        """Save installations DF as CSV (this is what services.metadata reads for URLs)"""
+        self.data_dir.mkdir(parents=True, exist_ok=True)
+        df.to_csv(self.data_dir / "installations.csv", index=False)
 
     def save_geojson(self, df: pd.DataFrame):
         """Take a DF of installations data and saves a GeoJSON"""

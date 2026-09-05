@@ -383,3 +383,323 @@
 2026-09-04 20:27:37,933 - INFO - Combined dataset: 65 total records
 2026-09-04 20:27:37,938 - INFO - Saved CSV to /home/cdonovan/repos/databoard/backend/data/metadata/metadata.csv
 2026-09-04 20:27:37,953 - INFO - Saved Parquet to /home/cdonovan/repos/databoard/backend/data/metadata/metadata.parquet
+2026-09-04 20:30:56,734 - INFO - Caching requests enabled
+2026-09-04 20:31:33,142 - INFO - Caching requests enabled
+2026-09-04 20:31:44,367 - INFO - Caching requests enabled
+2026-09-04 20:32:58,281 - INFO - Caching requests enabled
+2026-09-04 20:35:23,177 - INFO - Caching requests enabled
+2026-09-04 20:35:23,183 - INFO - Loaded 141 installation URLs
+2026-09-04 20:35:23,183 - INFO - Starting parallel metadata fetch for 141 installations
+2026-09-04 20:35:23,184 - INFO - fetch called with: start=0, per_page=1000, page_limit=300
+2026-09-04 20:35:23,228 - INFO - https://dataverse.yale.edu: Stopping - reached total, fetched 401 records
+2026-09-04 20:35:23,234 - INFO - https://dataverse.uvm.edu: Stopping - reached total, fetched 65 records
+2026-09-04 20:35:23,454 - WARNING - https://data.cimmyt.org: ClientResponseError, giving up, returning partial results (0 records)
+2026-09-04 20:35:23,643 - WARNING - https://datasets.coronawhy.org: ClientResponseError, giving up, returning partial results (0 records)
+2026-09-04 20:35:23,933 - WARNING - https://archive.data.jhu.edu: ClientResponseError, giving up, returning partial results (0 records)
+2026-09-04 20:35:23,938 - INFO - https://opendata.cesa.edu.co: Stopping - reached total, fetched 16 records
+2026-09-04 20:35:23,953 - WARNING - https://keen.zih.tu-dresden.de: ClientConnectorDNSError, giving up, returning partial results (0 records)
+2026-09-04 20:35:23,987 - WARNING - https://dataverse.cirad.fr: ClientResponseError, giving up, returning partial results (0 records)
+2026-09-04 20:35:24,106 - WARNING - https://dataverse.acg.maine.edu/dvn: ClientResponseError, giving up, returning partial results (0 records)
+2026-09-04 20:35:24,151 - WARNING - https://dataverse.csuc.cat: ClientOSError, giving up, returning partial results (0 records)
+2026-09-04 20:35:24,173 - WARNING - https://datarepositorium.sdum.uminho.pt: ClientConnectorError, giving up, returning partial results (0 records)
+2026-09-04 20:35:24,236 - INFO - https://dataverse.cbpf.br: Stopping - reached total, fetched 12 records
+2026-09-04 20:35:24,238 - WARNING - https://dmportal.biodata.pt: ContentTypeError, giving up, returning partial results (0 records)
+2026-09-04 20:35:24,270 - WARNING - https://datasets.iisg.amsterdam: ClientResponseError, giving up, returning partial results (0 records)
+2026-09-04 20:35:24,281 - WARNING - https://dataverse.tdl.org: ClientResponseError, giving up, returning partial results (0 records)
+2026-09-04 20:35:24,309 - WARNING - https://data.scielo.org: ClientResponseError, giving up, returning partial results (0 records)
+2026-09-04 20:35:24,402 - WARNING - https://dataverse.mpi-sws.org: ClientConnectorDNSError, giving up, returning partial results (0 records)
+2026-09-04 20:35:24,412 - INFO - https://dataverse.bhp.org.bw: Stopping - reached total, fetched 0 records
+2026-09-04 20:35:24,474 - WARNING - https://dataverse.ada.edu.au: ContentTypeError, giving up, returning partial results (0 records)
+2026-09-04 20:35:24,475 - INFO - https://indata.cedia.edu.ec: Stopping - reached total, fetched 6 records
+2026-09-04 20:35:24,574 - WARNING - https://data.worldagroforestry.org: ClientResponseError, giving up, returning partial results (0 records)
+2026-09-04 20:35:24,622 - INFO - https://dataverse.orc.gmu.edu: Stopping - reached total, fetched 76 records
+2026-09-04 20:35:24,696 - INFO - https://datosinvestigacion.udistrital.edu.co: Stopping - reached total, fetched 3 records
+2026-09-04 20:35:24,720 - WARNING - https://redape.dados.embrapa.br: ClientConnectorDNSError, giving up, returning partial results (0 records)
+2026-09-04 20:35:24,726 - WARNING - https://dataverse.nioz.nl: ClientResponseError, giving up, returning partial results (0 records)
+2026-09-04 20:35:24,820 - WARNING - https://dataverse.ileel.ufu.br: ClientConnectorDNSError, giving up, returning partial results (0 records)
+2026-09-04 20:35:24,860 - INFO - https://dados.ipb.pt: Stopping - reached total, fetched 9 records
+2026-09-04 20:35:24,896 - WARNING - https://dataverse.icrisat.org: ClientResponseError, giving up, returning partial results (0 records)
+2026-09-04 20:35:24,914 - INFO - https://dataverse.deic.dk: Stopping - reached total, fetched 20 records
+2026-09-04 20:35:25,017 - INFO - https://dataverse.bsc.es: Stopping - reached total, fetched 136 records
+2026-09-04 20:35:25,021 - WARNING - https://repositorio.polen.fccn.pt: ClientConnectorDNSError, giving up, returning partial results (0 records)
+2026-09-04 20:35:25,028 - INFO - https://dataverse.dartmouth.edu: Stopping - reached total, fetched 110 records
+2026-09-04 20:35:25,137 - INFO - https://data.univ-gustave-eiffel.fr: Stopping - reached total, fetched 54 records
+2026-09-04 20:35:25,150 - INFO - https://data.fdz.ioer.de: Stopping - reached total, fetched 40 records
+2026-09-04 20:35:25,233 - WARNING - https://research-data.urosario.edu.co: ClientResponseError, giving up, returning partial results (0 records)
+2026-09-04 20:35:25,261 - INFO - https://dataverse.tec.ac.cr: Stopping - reached total, fetched 72 records
+2026-09-04 20:35:25,329 - INFO - https://datav.udec.cl: Stopping - reached total, fetched 40 records
+2026-09-04 20:35:25,349 - INFO - https://sano.rodbuk.pl: Stopping - reached total, fetched 5 records
+2026-09-04 20:35:25,368 - WARNING - https://datosdeinvestigacion.udea.edu.co: ContentTypeError, giving up, returning partial results (0 records)
+2026-09-04 20:35:25,386 - WARNING - https://soildata.mapbiomas.org/: ContentTypeError, giving up, returning partial results (0 records)
+2026-09-04 20:35:25,486 - INFO - https://dataportal.ing.pan.pl: Stopping - reached total, fetched 51 records
+2026-09-04 20:35:25,514 - WARNING - https://dadosabertos.rnp.br: ClientConnectorDNSError, giving up, returning partial results (0 records)
+2026-09-04 20:35:25,633 - INFO - https://data.crossda.hr: Stopping - reached total, fetched 55 records
+2026-09-04 20:35:25,691 - INFO - https://researchdata.lib.polyu.edu.hk: Stopping - reached total, fetched 96 records
+2026-09-04 20:35:25,764 - INFO - https://dataverse.javeriana.edu.co: Stopping - reached total, fetched 27 records
+2026-09-04 20:35:25,772 - INFO - https://dataverse.cidacs.org: Stopping - reached total, fetched 241 records
+2026-09-04 20:35:25,845 - INFO - https://uken.rodbuk.pl: Stopping - reached total, fetched 18 records
+2026-09-04 20:35:25,869 - WARNING - https://data.cifor.org: ClientResponseError, giving up, returning partial results (0 records)
+2026-09-04 20:35:25,872 - INFO - https://datahub.tec.mx: Stopping - reached total, fetched 51 records
+2026-09-04 20:35:25,912 - WARNING - https://dataverse.ufabc.edu.br/api/search?q=*&type=dataverse&type=dataset&start=0&per_page=1000: status 503, retrying in 1s (attempt 1/3)
+2026-09-04 20:35:25,945 - INFO - https://dataverse.theacss.org: Stopping - reached total, fetched 202 records
+2026-09-04 20:35:26,182 - INFO - https://akf.rodbuk.pl: Stopping - reached total, fetched 50 records
+2026-09-04 20:35:26,189 - WARNING - https://dvn.fudan.edu.cn/api/search?q=*&type=dataverse&type=dataset&start=0&per_page=1000: status 502, retrying in 1s (attempt 1/3)
+2026-09-04 20:35:26,209 - INFO - https://datasets.up.edu.pe: Stopping - reached total, fetched 49 records
+2026-09-04 20:35:26,349 - INFO - https://datarepository.unive.it: Stopping - reached total, fetched 70 records
+2026-09-04 20:35:26,397 - INFO - https://dare.uol.de: Stopping - reached total, fetched 116 records
+2026-09-04 20:35:26,514 - INFO - https://dataverse.rhi.hi.is: Stopping - reached total, fetched 53 records
+2026-09-04 20:35:26,605 - INFO - https://datos.usach.cl: Stopping - reached total, fetched 42 records
+2026-09-04 20:35:26,612 - INFO - https://dataverse.iza.org: Stopping - reached total, fetched 123 records
+2026-09-04 20:35:26,771 - INFO - https://dataverse.iit.it: Stopping - reached total, fetched 170 records
+2026-09-04 20:35:26,800 - INFO - https://datospararesiliencia.cl: Stopping - reached total, fetched 126 records
+2026-09-04 20:35:26,862 - INFO - https://pk.rodbuk.pl: Stopping - reached total, fetched 63 records
+2026-09-04 20:35:27,005 - INFO - https://datos.unlp.edu.ar: Stopping - reached total, fetched 60 records
+2026-09-04 20:35:27,095 - INFO - https://danebadawcze.uw.edu.pl: Stopping - reached total, fetched 1271 records
+2026-09-04 20:35:27,163 - INFO - https://datasets.lib.berkeley.edu: Stopping - reached total, fetched 254 records
+2026-09-04 20:35:27,184 - INFO - https://opendata.nas.gov.ua: Stopping - reached total, fetched 82 records
+2026-09-04 20:35:27,220 - INFO - https://dataverse.lib.unb.ca: Stopping - reached total, fetched 144 records
+2026-09-04 20:35:27,259 - INFO - https://ifj.rodbuk.pl: Stopping - reached total, fetched 106 records
+2026-09-04 20:35:27,285 - INFO - https://dataverse.fgv.br: Stopping - reached total, fetched 115 records
+2026-09-04 20:35:27,323 - INFO - https://dataverse.unr.edu.ar: Stopping - reached total, fetched 96 records
+2026-09-04 20:35:27,470 - WARNING - https://dvn.fudan.edu.cn/api/search?q=*&type=dataverse&type=dataset&start=0&per_page=1000: status 502, retrying in 2s (attempt 2/3)
+2026-09-04 20:35:27,497 - WARNING - https://dataverse.ufabc.edu.br/api/search?q=*&type=dataverse&type=dataset&start=0&per_page=1000: status 503, retrying in 2s (attempt 2/3)
+2026-09-04 20:35:27,547 - INFO - https://uek.rodbuk.pl: Stopping - reached total, fetched 59 records
+2026-09-04 20:35:27,557 - INFO - https://bonndata.uni-bonn.de: Stopping - reached total, fetched 401 records
+2026-09-04 20:35:27,708 - INFO - https://datos.uchile.cl: Stopping - reached total, fetched 187 records
+2026-09-04 20:35:27,758 - INFO - https://dataverse.pushdom.ru: Stopping - reached total, fetched 54 records
+2026-09-04 20:35:28,005 - INFO - https://dataverse.uclouvain.be: Stopping - reached total, fetched 303 records
+2026-09-04 20:35:28,131 - INFO - https://dataverse.asu.edu: Stopping - reached total, fetched 129 records
+2026-09-04 20:35:28,145 - INFO - https://osnadata.ub.uni-osnabrueck.de: Stopping - reached total, fetched 105 records
+2026-09-04 20:35:28,457 - INFO - https://redata.anii.org.uy: Stopping - reached total, fetched 151 records
+2026-09-04 20:35:28,859 - INFO - https://repositoriopesquisas.ibict.br: Stopping - reached total, fetched 273 records
+2026-09-04 20:35:28,952 - INFO - https://dataverse.rsu.lv: Stopping - reached total, fetched 183 records
+2026-09-04 20:35:29,303 - INFO - https://dataspace.ust.hk: Stopping - reached total, fetched 209 records
+2026-09-04 20:35:29,747 - WARNING - https://dvn.fudan.edu.cn/api/search?q=*&type=dataverse&type=dataset&start=0&per_page=1000: status 502, retrying in 4s (attempt 3/3)
+2026-09-04 20:35:30,086 - WARNING - https://dataverse.ufabc.edu.br/api/search?q=*&type=dataverse&type=dataset&start=0&per_page=1000: status 503, retrying in 4s (attempt 3/3)
+2026-09-04 20:35:30,131 - INFO - https://uwr.rodbuk.pl: Stopping - reached total, fetched 172 records
+2026-09-04 20:35:30,171 - INFO - https://phys-techsciences.datastations.nl: Stopping - reached total, fetched 895 records
+2026-09-04 20:35:30,958 - INFO - https://opendata.pku.edu.cn: Stopping - reached total, fetched 683 records
+2026-09-04 20:35:32,044 - WARNING - https://dataverse.unc.edu: ClientResponseError, giving up, returning partial results (0 records)
+2026-09-04 20:35:32,354 - INFO - https://researchdata.nie.edu.sg: Stopping - reached total, fetched 441 records
+2026-09-04 20:35:33,198 - INFO - https://dv.dataverse.lv: Stopping - reached total, fetched 435 records
+2026-09-04 20:35:33,493 - INFO - https://planetary-data-portal.org: Stopping - reached total, fetched 164 records
+2026-09-04 20:35:33,725 - INFO - https://dataverse.fiu.edu: Stopping - reached total, fetched 131 records
+2026-09-04 20:35:33,987 - INFO - https://dataverse.uliege.be: Stopping - reached total, fetched 60 records
+2026-09-04 20:35:34,024 - WARNING - https://dvn.fudan.edu.cn: giving up after repeated rate-limit/server errors, returning partial results (0 records)
+2026-09-04 20:35:34,165 - WARNING - https://heidata.uni-heidelberg.de/api/search?q=*&type=dataverse&type=dataset&start=0&per_page=1000: status 500, retrying in 1s (attempt 1/3)
+2026-09-04 20:35:34,483 - INFO - https://lifesciences.datastations.nl: Stopping - reached total, fetched 1107 records
+2026-09-04 20:35:34,673 - WARNING - https://dataverse.ufabc.edu.br: giving up after repeated rate-limit/server errors, returning partial results (0 records)
+2026-09-04 20:35:34,812 - INFO - https://repo.researchdata.hu: Stopping - reached total, fetched 509 records
+2026-09-04 20:35:35,312 - INFO - https://dataverse.lib.nycu.edu.tw: Stopping - reached total, fetched 329 records
+2026-09-04 20:35:35,332 - INFO - https://repod.icm.edu.pl: Stopping - reached total, fetched 4608 records
+2026-09-04 20:35:35,645 - INFO - https://data.qdr.syr.edu: Stopping - reached total, fetched 243 records
+2026-09-04 20:35:36,560 - INFO - https://dataverse.vtti.vt.edu: Stopping - reached total, fetched 221 records
+2026-09-04 20:35:37,202 - INFO - https://dataverse.arcc.uwyo.edu: Stopping - reached total, fetched 252 records
+2026-09-04 20:35:38,137 - INFO - https://lida.dataverse.lt: Stopping - reached total, fetched 866 records
+2026-09-04 20:35:38,690 - INFO - https://www.sodha.be: Stopping - reached total, fetched 204 records
+2026-09-04 20:35:38,895 - INFO - https://researchdata.cuhk.edu.hk: Stopping - reached total, fetched 517 records
+2026-09-04 20:35:39,244 - INFO - https://data.tu-dortmund.de: Stopping - reached total, fetched 382 records
+2026-09-04 20:35:39,541 - INFO - https://papyrus-datos.co: Stopping - reached total, fetched 995 records
+2026-09-04 20:35:39,724 - WARNING - https://agh.rodbuk.pl/api/search?q=*&type=dataverse&type=dataset&start=0&per_page=1000: status 504, retrying in 1s (attempt 1/3)
+2026-09-04 20:35:39,799 - WARNING - https://uj.rodbuk.pl/api/search?q=*&type=dataverse&type=dataset&start=0&per_page=1000: status 504, retrying in 1s (attempt 1/3)
+2026-09-04 20:35:40,568 - INFO - https://dataverse.unimi.it: Stopping - reached total, fetched 1051 records
+2026-09-04 20:35:41,607 - INFO - https://data.mel.cgiar.org: Stopping - reached total, fetched 648 records
+2026-09-04 20:35:42,519 - INFO - https://dataverse.ipgp.fr: Stopping - reached total, fetched 97 records
+2026-09-04 20:35:43,943 - WARNING - https://dataverse.ifdc.org/api/search?q=*&type=dataverse&type=dataset&start=0&per_page=1000: status 500, retrying in 1s (attempt 1/3)
+2026-09-04 20:35:44,365 - INFO - https://data.sciencespo.fr: Stopping - reached total, fetched 638 records
+2026-09-04 20:35:45,521 - WARNING - https://heidata.uni-heidelberg.de/api/search?q=*&type=dataverse&type=dataset&start=0&per_page=1000: status 500, retrying in 2s (attempt 2/3)
+2026-09-04 20:35:45,806 - INFO - https://data.aussda.at: Stopping - reached total, fetched 1644 records
+2026-09-04 20:35:49,459 - INFO - https://datos.pucp.edu.pe: Stopping - reached total, fetched 876 records
+2026-09-04 20:35:51,203 - INFO - https://dataverse.lib.virginia.edu: Stopping - reached total, fetched 837 records
+2026-09-04 20:35:53,569 - INFO - https://dataverse.ucla.edu: Stopping - reached total, fetched 1511 records
+2026-09-04 20:35:53,937 - INFO - https://rodbuk.pl: Stopping - reached total, fetched 1878 records
+2026-09-04 20:35:55,868 - WARNING - https://agh.rodbuk.pl/api/search?q=*&type=dataverse&type=dataset&start=0&per_page=1000: status 504, retrying in 2s (attempt 2/3)
+2026-09-04 20:35:55,941 - WARNING - https://uj.rodbuk.pl/api/search?q=*&type=dataverse&type=dataset&start=0&per_page=1000: status 504, retrying in 2s (attempt 2/3)
+2026-09-04 20:35:56,047 - INFO - https://data.goettingen-research-online.de: Stopping - reached total, fetched 3075 records
+2026-09-04 20:35:56,191 - INFO - https://dataverse.ird.fr: Stopping - reached total, fetched 1526 records
+2026-09-04 20:35:57,890 - WARNING - https://heidata.uni-heidelberg.de/api/search?q=*&type=dataverse&type=dataset&start=0&per_page=1000: status 500, retrying in 4s (attempt 3/3)
+2026-09-04 20:35:58,296 - WARNING - https://entrepot.recherche.data.gouv.fr/api/search?q=*&type=dataverse&type=dataset&start=0&per_page=1000: status 504, retrying in 1s (attempt 1/3)
+2026-09-04 20:36:05,093 - WARNING - https://dataverse.ifdc.org/api/search?q=*&type=dataverse&type=dataset&start=0&per_page=1000: status 500, retrying in 2s (attempt 2/3)
+2026-09-04 20:36:08,878 - INFO - https://abacus.library.ubc.ca: Stopping - reached total, fetched 2647 records
+2026-09-04 20:36:10,275 - WARNING - https://domusdados.unifesp.br: ClientResponseError, giving up, returning partial results (0 records)
+2026-09-04 20:36:10,430 - INFO - https://edmond.mpdl.mpg.de: Stopping - reached total, fetched 1868 records
+2026-09-04 20:36:12,256 - WARNING - https://heidata.uni-heidelberg.de: giving up after repeated rate-limit/server errors, returning partial results (0 records)
+2026-09-04 20:36:13,011 - WARNING - https://agh.rodbuk.pl/api/search?q=*&type=dataverse&type=dataset&start=0&per_page=1000: status 504, retrying in 4s (attempt 3/3)
+2026-09-04 20:36:13,084 - WARNING - https://uj.rodbuk.pl/api/search?q=*&type=dataverse&type=dataset&start=0&per_page=1000: status 504, retrying in 4s (attempt 3/3)
+2026-09-04 20:36:13,788 - INFO - https://darus.uni-stuttgart.de: Stopping - reached total, fetched 3459 records
+2026-09-04 20:36:18,458 - INFO - https://rdr.kuleuven.be: Stopping - reached total, fetched 838 records
+2026-09-04 20:36:27,233 - WARNING - https://dataverse.ifdc.org/api/search?q=*&type=dataverse&type=dataset&start=0&per_page=1000: status 500, retrying in 4s (attempt 3/3)
+2026-09-04 20:36:28,006 - INFO - https://edatos.consorciomadrono.es: Stopping - reached total, fetched 2487 records
+2026-09-04 20:36:32,148 - WARNING - https://agh.rodbuk.pl: giving up after repeated rate-limit/server errors, returning partial results (0 records)
+2026-09-04 20:36:32,229 - WARNING - https://uj.rodbuk.pl: giving up after repeated rate-limit/server errors, returning partial results (0 records)
+2026-09-04 20:36:40,968 - WARNING - https://entrepot.recherche.data.gouv.fr/api/search?q=*&type=dataverse&type=dataset&start=0&per_page=1000: status 504, retrying in 2s (attempt 2/3)
+2026-09-04 20:36:47,967 - INFO - https://researchdata.ntu.edu.sg: Stopping - reached total, fetched 3504 records
+2026-09-04 20:36:49,496 - INFO - https://data.cipotato.org: Stopping - reached total, fetched 973 records
+2026-09-04 20:36:51,379 - WARNING - https://dataverse.ifdc.org: giving up after repeated rate-limit/server errors, returning partial results (0 records)
+2026-09-04 20:37:01,232 - INFO - https://dataverse.no: Stopping - reached total, fetched 2313 records
+2026-09-04 20:37:04,739 - WARNING - https://data.fz-juelich.de: ServerDisconnectedError, giving up, returning partial results (0 records)
+2026-09-04 20:37:16,485 - WARNING - https://entrepot.recherche.data.gouv.fr/api/search?q=*&type=dataverse&type=dataset&start=0&per_page=1000: status 504, retrying in 4s (attempt 3/3)
+2026-09-04 20:37:18,803 - INFO - https://ssh.datastations.nl: Stopping - reached total, fetched 8136 records
+2026-09-04 20:37:29,047 - INFO - https://dataverse.nl: Stopping - reached total, fetched 10394 records
+2026-09-04 20:37:34,361 - INFO - https://data.brin.go.id: Stopping - reached total, fetched 7113 records
+2026-09-04 20:37:37,216 - WARNING - https://dunas.ua.pt: ClientConnectorError, giving up, returning partial results (0 records)
+2026-09-04 20:37:41,500 - INFO - https://dadosdepesquisa.fiocruz.br: Stopping - reached total, fetched 877 records
+2026-09-04 20:37:54,693 - WARNING - https://entrepot.recherche.data.gouv.fr: giving up after repeated rate-limit/server errors, returning partial results (0 records)
+2026-09-04 20:38:11,192 - INFO - https://dataverse.whoi.edu: Stopping - reached total, fetched 4378 records
+2026-09-04 20:38:23,901 - WARNING - https://dataverse.adp.fdv.uni-lj.si: TimeoutError, giving up, returning partial results (0 records)
+2026-09-04 20:38:30,568 - INFO - https://portal.odissei.nl: Stopping - reached total, fetched 9088 records
+2026-09-04 20:41:17,042 - INFO - https://dataverse.jpl.nasa.gov: Stopping - reached total, fetched 47959 records
+2026-09-04 20:51:24,011 - INFO - https://borealisdata.ca: Stopping - reached total, fetched 26347 records
+2026-09-04 21:03:00,633 - INFO - https://archaeology.datastations.nl: Stopping - reached total, fetched 175672 records
+2026-09-04 21:17:45,547 - INFO - https://dataverse.openforestdata.pl: Stopping - reached total, fetched 79830 records
+2026-09-04 22:06:59,741 - INFO - https://dataverse.harvard.edu: Stopping - hit page_limit (301 > 300), fetched 300000 records
+2026-09-04 22:07:01,882 - INFO - SUCCESS: https://abacus.library.ubc.ca - 2647 records
+2026-09-04 22:07:01,884 - INFO - SUCCESS: https://dataverse.theacss.org - 202 records
+2026-09-04 22:07:01,885 - WARNING - EMPTY: https://dataverse.ada.edu.au - No data returned
+2026-09-04 22:07:01,885 - WARNING - EMPTY: https://dataverse.adp.fdv.uni-lj.si - No data returned
+2026-09-04 22:07:01,885 - INFO - SUCCESS: https://dadosdepesquisa.fiocruz.br - 877 records
+2026-09-04 22:07:01,885 - INFO - SUCCESS: https://repo.researchdata.hu - 509 records
+2026-09-04 22:07:01,885 - INFO - SUCCESS: https://dataverse.asu.edu - 129 records
+2026-09-04 22:07:01,886 - INFO - SUCCESS: https://data.aussda.at - 1644 records
+2026-09-04 22:07:01,886 - INFO - SUCCESS: https://akf.rodbuk.pl - 50 records
+2026-09-04 22:07:01,886 - WARNING - EMPTY: https://dmportal.biodata.pt - No data returned
+2026-09-04 22:07:01,886 - INFO - SUCCESS: https://bonndata.uni-bonn.de - 401 records
+2026-09-04 22:07:01,887 - INFO - SUCCESS: https://borealisdata.ca - 26347 records
+2026-09-04 22:07:01,887 - WARNING - EMPTY: https://dataverse.bhp.org.bw - No data returned
+2026-09-04 22:07:01,887 - INFO - SUCCESS: https://data.brin.go.id - 7113 records
+2026-09-04 22:07:01,887 - INFO - SUCCESS: https://dataverse.bsc.es - 136 records
+2026-09-04 22:07:01,888 - INFO - SUCCESS: https://dataverse.cbpf.br - 12 records
+2026-09-04 22:07:01,888 - INFO - SUCCESS: https://opendata.cesa.edu.co - 16 records
+2026-09-04 22:07:01,888 - INFO - SUCCESS: https://dataverse.cidacs.org - 241 records
+2026-09-04 22:07:01,888 - WARNING - EMPTY: https://data.cifor.org - No data returned
+2026-09-04 22:07:01,889 - WARNING - EMPTY: https://data.cimmyt.org - No data returned
+2026-09-04 22:07:01,889 - WARNING - EMPTY: https://dataverse.cirad.fr - No data returned
+2026-09-04 22:07:01,889 - WARNING - EMPTY: https://dataverse.csuc.cat - No data returned
+2026-09-04 22:07:01,889 - WARNING - EMPTY: https://datasets.coronawhy.org - No data returned
+2026-09-04 22:07:01,889 - INFO - SUCCESS: https://data.crossda.hr - 55 records
+2026-09-04 22:07:01,889 - INFO - SUCCESS: https://researchdata.cuhk.edu.hk - 517 records
+2026-09-04 22:07:01,890 - INFO - SUCCESS: https://dados.ipb.pt - 9 records
+2026-09-04 22:07:01,890 - INFO - SUCCESS: https://danebadawcze.uw.edu.pl - 1271 records
+2026-09-04 22:07:01,891 - INFO - SUCCESS: https://archaeology.datastations.nl - 175672 records
+2026-09-04 22:07:01,894 - INFO - SUCCESS: https://lifesciences.datastations.nl - 1107 records
+2026-09-04 22:07:01,894 - INFO - SUCCESS: https://phys-techsciences.datastations.nl - 895 records
+2026-09-04 22:07:01,895 - INFO - SUCCESS: https://ssh.datastations.nl - 8136 records
+2026-09-04 22:07:01,895 - INFO - SUCCESS: https://dare.uol.de - 116 records
+2026-09-04 22:07:01,895 - INFO - SUCCESS: https://dataverse.dartmouth.edu - 110 records
+2026-09-04 22:07:01,896 - INFO - SUCCESS: https://darus.uni-stuttgart.de - 3459 records
+2026-09-04 22:07:01,896 - INFO - SUCCESS: https://dataverse.ird.fr - 1526 records
+2026-09-04 22:07:01,896 - INFO - SUCCESS: https://data.sciencespo.fr - 638 records
+2026-09-04 22:07:01,897 - INFO - SUCCESS: https://dataportal.ing.pan.pl - 51 records
+2026-09-04 22:07:01,897 - WARNING - EMPTY: https://datarepositorium.sdum.uminho.pt - No data returned
+2026-09-04 22:07:01,897 - INFO - SUCCESS: https://dataspace.ust.hk - 209 records
+2026-09-04 22:07:01,897 - INFO - SUCCESS: https://edatos.consorciomadrono.es - 2487 records
+2026-09-04 22:07:01,898 - INFO - SUCCESS: https://dv.dataverse.lv - 435 records
+2026-09-04 22:07:01,898 - INFO - SUCCESS: https://dataverse.nl - 10394 records
+2026-09-04 22:07:01,899 - INFO - SUCCESS: https://dataverse.no - 2313 records
+2026-09-04 22:07:01,899 - INFO - SUCCESS: https://opendata.nas.gov.ua - 82 records
+2026-09-04 22:07:01,900 - INFO - SUCCESS: https://dataverse.rhi.hi.is - 53 records
+2026-09-04 22:07:01,900 - INFO - SUCCESS: https://datospararesiliencia.cl - 126 records
+2026-09-04 22:07:01,900 - INFO - SUCCESS: https://dataverse.deic.dk - 20 records
+2026-09-04 22:07:01,901 - WARNING - EMPTY: https://domusdados.unifesp.br - No data returned
+2026-09-04 22:07:01,901 - INFO - SUCCESS: https://researchdata.ntu.edu.sg - 3504 records
+2026-09-04 22:07:01,901 - WARNING - EMPTY: https://dunas.ua.pt - No data returned
+2026-09-04 22:07:01,901 - INFO - SUCCESS: https://edmond.mpdl.mpg.de - 1868 records
+2026-09-04 22:07:01,902 - INFO - SUCCESS: https://dataverse.fgv.br - 115 records
+2026-09-04 22:07:01,902 - INFO - SUCCESS: https://dataverse.fiu.edu - 131 records
+2026-09-04 22:07:01,902 - WARNING - EMPTY: https://dvn.fudan.edu.cn - No data returned
+2026-09-04 22:07:01,902 - INFO - SUCCESS: https://dataverse.orc.gmu.edu - 76 records
+2026-09-04 22:07:01,903 - INFO - SUCCESS: https://data.univ-gustave-eiffel.fr - 54 records
+2026-09-04 22:07:01,903 - INFO - SUCCESS: https://data.goettingen-research-online.de - 3075 records
+2026-09-04 22:07:01,903 - INFO - SUCCESS: https://dataverse.harvard.edu - 300000 records
+2026-09-04 22:07:01,908 - WARNING - EMPTY: https://heidata.uni-heidelberg.de - No data returned
+2026-09-04 22:07:01,908 - INFO - SUCCESS: https://repositoriopesquisas.ibict.br - 273 records
+2026-09-04 22:07:01,909 - WARNING - EMPTY: https://dataverse.icrisat.org - No data returned
+2026-09-04 22:07:01,909 - WARNING - EMPTY: https://dataverse.mpi-sws.org - No data returned
+2026-09-04 22:07:01,909 - INFO - SUCCESS: https://dataverse.iza.org - 123 records
+2026-09-04 22:07:01,909 - WARNING - EMPTY: https://dataverse.ifdc.org - No data returned
+2026-09-04 22:07:01,909 - WARNING - EMPTY: https://datasets.iisg.amsterdam - No data returned
+2026-09-04 22:07:01,909 - INFO - SUCCESS: https://indata.cedia.edu.ec - 6 records
+2026-09-04 22:07:01,909 - INFO - SUCCESS: https://dataverse.pushdom.ru - 54 records
+2026-09-04 22:07:01,910 - INFO - SUCCESS: https://data.cipotato.org - 973 records
+2026-09-04 22:07:01,910 - INFO - SUCCESS: https://data.fdz.ioer.de - 40 records
+2026-09-04 22:07:01,910 - INFO - SUCCESS: https://dataverse.ipgp.fr - 97 records
+2026-09-04 22:07:01,910 - INFO - SUCCESS: https://dataverse.iit.it - 170 records
+2026-09-04 22:07:01,911 - WARNING - EMPTY: https://archive.data.jhu.edu - No data returned
+2026-09-04 22:07:01,911 - INFO - SUCCESS: https://dataverse.jpl.nasa.gov - 47959 records
+2026-09-04 22:07:01,912 - WARNING - EMPTY: https://data.fz-juelich.de - No data returned
+2026-09-04 22:07:01,912 - WARNING - EMPTY: https://keen.zih.tu-dresden.de - No data returned
+2026-09-04 22:07:01,912 - INFO - SUCCESS: https://rdr.kuleuven.be - 838 records
+2026-09-04 22:07:01,912 - INFO - SUCCESS: https://dataverse.lib.virginia.edu - 837 records
+2026-09-04 22:07:01,912 - INFO - SUCCESS: https://lida.dataverse.lt - 866 records
+2026-09-04 22:07:01,913 - WARNING - EMPTY: https://dataverse.acg.maine.edu/dvn - No data returned
+2026-09-04 22:07:01,913 - INFO - SUCCESS: https://dataverse.whoi.edu - 4378 records
+2026-09-04 22:07:01,913 - INFO - SUCCESS: https://data.mel.cgiar.org - 648 records
+2026-09-04 22:07:01,913 - INFO - SUCCESS: https://researchdata.nie.edu.sg - 441 records
+2026-09-04 22:07:01,914 - WARNING - EMPTY: https://dataverse.nioz.nl - No data returned
+2026-09-04 22:07:01,914 - INFO - SUCCESS: https://dataverse.lib.nycu.edu.tw - 329 records
+2026-09-04 22:07:01,914 - INFO - SUCCESS: https://portal.odissei.nl - 9088 records
+2026-09-04 22:07:01,915 - INFO - SUCCESS: https://dataverse.uclouvain.be - 303 records
+2026-09-04 22:07:01,915 - INFO - SUCCESS: https://dataverse.openforestdata.pl - 79830 records
+2026-09-04 22:07:01,916 - INFO - SUCCESS: https://osnadata.ub.uni-osnabrueck.de - 105 records
+2026-09-04 22:07:01,916 - INFO - SUCCESS: https://papyrus-datos.co - 995 records
+2026-09-04 22:07:01,917 - INFO - SUCCESS: https://opendata.pku.edu.cn - 683 records
+2026-09-04 22:07:01,917 - INFO - SUCCESS: https://researchdata.lib.polyu.edu.hk - 96 records
+2026-09-04 22:07:01,917 - INFO - SUCCESS: https://datos.pucp.edu.pe - 876 records
+2026-09-04 22:07:01,918 - INFO - SUCCESS: https://data.qdr.syr.edu - 243 records
+2026-09-04 22:07:01,918 - WARNING - EMPTY: https://entrepot.recherche.data.gouv.fr - No data returned
+2026-09-04 22:07:01,918 - WARNING - EMPTY: https://redape.dados.embrapa.br - No data returned
+2026-09-04 22:07:01,918 - INFO - SUCCESS: https://repod.icm.edu.pl - 4608 records
+2026-09-04 22:07:01,918 - INFO - SUCCESS: https://redata.anii.org.uy - 151 records
+2026-09-04 22:07:01,919 - INFO - SUCCESS: https://dataverse.unr.edu.ar - 96 records
+2026-09-04 22:07:01,919 - INFO - SUCCESS: https://datos.uchile.cl - 187 records
+2026-09-04 22:07:01,919 - INFO - SUCCESS: https://datos.unlp.edu.ar - 60 records
+2026-09-04 22:07:01,920 - WARNING - EMPTY: https://datosdeinvestigacion.udea.edu.co - No data returned
+2026-09-04 22:07:01,920 - WARNING - EMPTY: https://research-data.urosario.edu.co - No data returned
+2026-09-04 22:07:01,920 - INFO - SUCCESS: https://datos.usach.cl - 42 records
+2026-09-04 22:07:01,920 - INFO - SUCCESS: https://datav.udec.cl - 40 records
+2026-09-04 22:07:01,920 - INFO - SUCCESS: https://datasets.up.edu.pe - 49 records
+2026-09-04 22:07:01,920 - INFO - SUCCESS: https://dataverse.javeriana.edu.co - 27 records
+2026-09-04 22:07:01,921 - INFO - SUCCESS: https://datosinvestigacion.udistrital.edu.co - 3 records
+2026-09-04 22:07:01,921 - INFO - SUCCESS: https://dataverse.tec.ac.cr - 72 records
+2026-09-04 22:07:01,921 - WARNING - EMPTY: https://dataverse.ufabc.edu.br - No data returned
+2026-09-04 22:07:01,921 - WARNING - EMPTY: https://dataverse.ileel.ufu.br - No data returned
+2026-09-04 22:07:01,921 - WARNING - EMPTY: https://repositorio.polen.fccn.pt - No data returned
+2026-09-04 22:07:01,921 - WARNING - EMPTY: https://dadosabertos.rnp.br - No data returned
+2026-09-04 22:07:01,921 - WARNING - EMPTY: https://soildata.mapbiomas.org/ - No data returned
+2026-09-04 22:07:01,921 - INFO - SUCCESS: https://uken.rodbuk.pl - 18 records
+2026-09-04 22:07:01,922 - INFO - SUCCESS: https://rodbuk.pl - 1878 records
+2026-09-04 22:07:01,922 - WARNING - EMPTY: https://agh.rodbuk.pl - No data returned
+2026-09-04 22:07:01,922 - INFO - SUCCESS: https://pk.rodbuk.pl - 63 records
+2026-09-04 22:07:01,922 - INFO - SUCCESS: https://uek.rodbuk.pl - 59 records
+2026-09-04 22:07:01,922 - WARNING - EMPTY: https://uj.rodbuk.pl - No data returned
+2026-09-04 22:07:01,922 - INFO - SUCCESS: https://dataverse.rsu.lv - 183 records
+2026-09-04 22:07:01,923 - INFO - SUCCESS: https://sano.rodbuk.pl - 5 records
+2026-09-04 22:07:01,923 - WARNING - EMPTY: https://data.scielo.org - No data returned
+2026-09-04 22:07:01,923 - INFO - SUCCESS: https://www.sodha.be - 204 records
+2026-09-04 22:07:01,923 - INFO - SUCCESS: https://datahub.tec.mx - 51 records
+2026-09-04 22:07:01,923 - WARNING - EMPTY: https://dataverse.tdl.org - No data returned
+2026-09-04 22:07:01,923 - INFO - SUCCESS: https://ifj.rodbuk.pl - 106 records
+2026-09-04 22:07:01,924 - INFO - SUCCESS: https://planetary-data-portal.org - 164 records
+2026-09-04 22:07:01,924 - INFO - SUCCESS: https://data.tu-dortmund.de - 382 records
+2026-09-04 22:07:01,924 - INFO - SUCCESS: https://datasets.lib.berkeley.edu - 254 records
+2026-09-04 22:07:01,925 - INFO - SUCCESS: https://dataverse.ucla.edu - 1511 records
+2026-09-04 22:07:01,925 - INFO - SUCCESS: https://dataverse.uliege.be - 60 records
+2026-09-04 22:07:01,926 - INFO - SUCCESS: https://dataverse.lib.unb.ca - 144 records
+2026-09-04 22:07:01,926 - WARNING - EMPTY: https://dataverse.unc.edu - No data returned
+2026-09-04 22:07:01,926 - INFO - SUCCESS: https://uwr.rodbuk.pl - 172 records
+2026-09-04 22:07:01,926 - INFO - SUCCESS: https://datarepository.unive.it - 70 records
+2026-09-04 22:07:01,927 - INFO - SUCCESS: https://dataverse.unimi.it - 1051 records
+2026-09-04 22:07:01,927 - INFO - SUCCESS: https://dataverse.vtti.vt.edu - 221 records
+2026-09-04 22:07:01,927 - WARNING - EMPTY: https://data.worldagroforestry.org - No data returned
+2026-09-04 22:07:01,927 - INFO - SUCCESS: https://dataverse.arcc.uwyo.edu - 252 records
+2026-09-04 22:07:01,927 - INFO - SUCCESS: https://dataverse.yale.edu - 401 records
+2026-09-04 22:07:01,928 - INFO - SUCCESS: https://dataverse.uvm.edu - 65 records
+2026-09-04 22:07:01,929 - WARNING - Logged 38 failures to logs/failed_installations.csv
+2026-09-04 22:07:02,084 - INFO - Completed in 5498.90 seconds
+2026-09-04 22:07:02,084 - INFO - Successfully fetched from 88/141 installations
+2026-09-04 22:07:02,172 - INFO - Combined dataset: 541730 total records
+2026-09-04 22:07:13,841 - INFO - Saved CSV to /home/cdonovan/repos/databoard/backend/data/metadata/metadata.csv
+2026-09-04 22:07:17,554 - INFO - Saved Parquet to /home/cdonovan/repos/databoard/backend/data/metadata/metadata.parquet
+2026-09-04 22:08:59,052 - INFO - Caching requests enabled
+2026-09-04 22:08:59,053 - INFO - Loaded 1 URLs manually
+2026-09-04 22:08:59,956 - INFO - Saved installation sizes to /home/cdonovan/repos/databoard/backend/logs/installation_sizes.csv
