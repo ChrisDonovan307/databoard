@@ -12,14 +12,31 @@ def parse_args():
     parser.add_argument(
         "--cmd",
         required=True,
-        choices=["installations", "metadata", "sizes", "all"],
+        choices=["init-db", "load-parquet", "installations", "metadata", "sizes", "all"],
         default="all",
         help="Which set of functions to run. \
-            'installations': pull list of installations from Dataverse map. \
-            'metadata': use Dataverse search API to get metadata from each Dataverse, combine, and save. \
+            'init-db': create the MySQL schema (Base.metadata.create_all). \
+            'load-parquet': one-time initial load of data/metadata/metadata.parquet into MySQL. \
+            'installations': pull list of installations from Dataverse map into the installation table. \
+            'metadata': use Dataverse search API to get metadata from each Dataverse and upsert into MySQL. \
             'sizes': cheap per_page=1 probe of each installation's total_count, saved to logs/installation_sizes.csv, \
             to see which installations are large before running a real pull. \
             (default: all)",
+    )
+    parser.add_argument(
+        "--dump-page-limit",
+        type=int,
+        default=300,
+        help="(load-parquet) The --page-limit that produced metadata.parquet. Installations "
+        "whose row count reached page_limit*per_page are treated as capped and left "
+        "un-watermarked. (default: 300)",
+    )
+    parser.add_argument(
+        "--export-parquet",
+        metavar="PATH",
+        default=None,
+        help="Dump the dataset/dataverse tables to a flat parquet at PATH and exit. "
+        "Offline-sharing helper, not part of the pipeline.",
     )
     parser.add_argument(
         "--start",
@@ -95,6 +112,25 @@ def parse_args():
 
 def main():
     args = parse_args()
+
+    if args.export_parquet:
+        Metadata.export_parquet(args.export_parquet)
+        return
+
+    if args.cmd == "init-db":
+        from db.schema_init import create_all
+
+        create_all()
+        print("Schema created.")
+        return
+    if args.cmd == "load-parquet":
+        from services.loader import load_parquet_dump
+
+        load_parquet_dump(
+            dump_page_limit=args.dump_page_limit, per_page=args.per_page
+        )
+        return
+
     if args.cmd in ("installations", "all"):
         Installation().call()
     if args.cmd == "sizes":

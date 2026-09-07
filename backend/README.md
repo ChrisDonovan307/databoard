@@ -1,6 +1,7 @@
 # Orchestrator
 
-Heap of scripts to get Dataverse installation info and use it to download metadata for dataverses, datasets, and files stored in each installation.
+Scripts to get Dataverse installation info and download metadata for dataverses
+and datasets from each installation, into **MySQL** (see `../docs/adr/0001-mysql-on-silk-for-metadata-store.md`).
 
 Get help:
 
@@ -8,11 +9,49 @@ Get help:
 python -m services.orchestrator --help
 ```
 
-Run everything:
+## Database setup
+
+Persistence is MySQL. The pull runs on a laptop and writes to Silk's MySQL over
+an SSH tunnel; Flask on Silk reads it from localhost.
+
+1. Open a tunnel (leave running): `ssh -L 3306:localhost:3306 <silk-host>`
+2. Set the connection string in `backend/.env`:
+   ```
+   DATABASE_URL=mysql+pymysql://<user>:<pass>@127.0.0.1:3306/<db>
+   ```
+3. Create the schema:
+   ```
+   python -m services.orchestrator --cmd init-db
+   ```
+
+## First-time load
 
 ```
-python -m services.orchestrator --cmd all
+python -m services.orchestrator --cmd installations      # populate the installation table
+python -m services.orchestrator --cmd load-parquet        # one-time: data/metadata/metadata.parquet -> MySQL
 ```
+
+`load-parquet` seeds each installation's watermark to its max `published_at`,
+**except** installations whose row count in the dump hit the page cap
+(`--dump-page-limit` × `--per-page`, default 300 × 1000 → Harvard and ~15
+others). Those are left un-watermarked so the next `--incremental` run does a
+full pull for them.
+
+## Ongoing refresh
+
+```
+python -m services.orchestrator --cmd all           # installations + a metadata pull
+python -m services.orchestrator --cmd metadata --incremental
+```
+
+## Export
+
+```
+python -m services.orchestrator --export-parquet path/to/dump.parquet
+```
+
+Flat dump of the `dataverse` + `dataset` tables for offline sharing. Not part of
+the pipeline; lookups/junctions are not included.
 
 ## Dagster
 
@@ -60,7 +99,7 @@ python -m services.orchestrator --cmd metadata --file-type datasets --url-list h
 
 ### Incremental updates
 
-Add `--incremental` to only fetch records newer than the last successful pull per installation (watermark tracked in `data/state/last_pull.json`), appending and deduping into existing metadata files instead of overwriting. Falls back to a full pull per installation if no watermark exists yet or the filtered query fails.
+Add `--incremental` to only fetch records newer than the last successful pull per installation (watermark tracked in the `pull_state` table), upserting into MySQL instead of a full re-pull. Falls back to a full pull per installation if no watermark exists yet or the filtered query fails. Only installations that completed (reached total/page-limit/watermark, not stopped early on a rate-limit) advance their watermark.
 
 ```
 python -m services.orchestrator --cmd metadata --incremental

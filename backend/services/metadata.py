@@ -10,6 +10,13 @@ from aiohttp_client_cache import CachedSession, SQLiteBackend
 import logging
 from datetime import datetime, timezone
 
+from sqlalchemy import select
+
+from db import get_engine, get_session
+from db.models import Installation as InstallationRow, PullState
+from db.upsert import upsert_rows
+from services.ingest import ingest_installation
+
 
 ROOT = Path(__file__).resolve().parents[1]  # backend/
 
@@ -30,20 +37,60 @@ def url_to_name(url):
     return url.split("//")[1].split(".")[1]
 
 
-STATE_PATH = ROOT / "data" / "state" / "last_pull.json"
+_WATERMARK_FMT = "%Y-%m-%dT%H:%M:%SZ"
 
 
 def _load_state() -> dict[str, str]:
-    if not STATE_PATH.exists():
-        return {}
-    with open(STATE_PATH) as f:
-        return json.load(f)
+    """{installation_url: watermark string} from the pull_state table.
+
+    Watermark strings are formatted to match the Search API's published_at
+    ("...Z"), since _split_at_watermark compares them as plain strings.
+    """
+    out: dict[str, str] = {}
+    try:
+        with get_session() as s:
+            rows = s.execute(
+                select(InstallationRow.url, PullState.last_pulled_at).join(
+                    PullState, PullState.installation_id == InstallationRow.id
+                )
+            )
+            for url, ts in rows:
+                if ts is not None:
+                    out[url] = ts.strftime(_WATERMARK_FMT)
+    except Exception as e:  # noqa: BLE001 - no DB / empty table -> no watermarks
+        logger.warning(
+            f"Could not read pull_state ({type(e).__name__}: {e}); "
+            "treating all installations as un-watermarked"
+        )
+    return out
 
 
-def _save_state(state: dict[str, str]) -> None:
-    STATE_PATH.parent.mkdir(parents=True, exist_ok=True)
-    with open(STATE_PATH, "w") as f:
-        json.dump(state, f, indent=2)
+def _advance_watermarks(urls: set[str], ts: datetime) -> int:
+    """Set pull_state.last_pulled_at = ts for the given installation URLs."""
+    if not urls:
+        return 0
+    with get_session() as s:
+        conn = s.connection()
+        id_by_url = dict(
+            s.execute(
+                select(InstallationRow.url, InstallationRow.id).where(
+                    InstallationRow.url.in_(list(urls))
+                )
+            ).all()
+        )
+        rows = [
+            {"installation_id": id_by_url[u], "last_pulled_at": ts}
+            for u in urls
+            if u in id_by_url
+        ]
+        upsert_rows(
+            conn,
+            PullState.__table__,
+            rows,
+            index_elements=["installation_id"],
+            update_cols=["last_pulled_at"],
+        )
+    return len(rows)
 
 
 def _is_retryable_status(status: int) -> bool:
@@ -115,15 +162,30 @@ class Metadata:
     def call(self):
         self._pull_combine_save()
 
+    def _installation_ids(self) -> dict[str, int]:
+        """{installation_url: id} from the installation table."""
+        with get_session() as s:
+            return dict(
+                s.execute(select(InstallationRow.url, InstallationRow.id)).all()
+            )
+
     def _get_urls(self) -> list[str]:
         """Take input arg, return URLs of installations as list of strings to call when collecting data"""
         # Load installation data to get URLs
         if self.url_list == "installations":
+            try:
+                urls = list(self._installation_ids().keys())
+            except Exception as e:  # noqa: BLE001
+                logger.warning(f"Could not read installation table ({type(e).__name__}: {e})")
+                urls = []
+            if urls:
+                logger.info(f"Loaded {len(urls)} installation URLs from DB")
+                return urls
             installations = pd.read_csv(
                 ROOT / "data" / "installations" / "installations.csv"
             )
             urls = installations["url"].tolist()
-            logger.info(f"Loaded {len(urls)} installation URLs")
+            logger.info(f"Loaded {len(urls)} installation URLs from CSV (DB empty)")
         else:
             if not isinstance(self.url_list, list):
                 raise TypeError(
@@ -168,73 +230,62 @@ class Metadata:
             f"Successfully fetched from {len(dfs)}/{len(self.urls)} installations"
         )
 
-        # Combine into single dataset
         if len(dfs) == 0:
             logger.error("No data fetched from any installation. Nothing to save.")
             return
-        elif len(dfs) == 1:
-            df = list(dfs.values())[0]
-        else:
-            df = pd.concat(dfs.values(), ignore_index=True)
 
-        logger.info(f"Combined dataset: {len(df)} total records")
+        total = sum(len(df) for df in dfs.values())
+        logger.info(f"Fetched {total} records across {len(dfs)} installations")
 
         # Track which installation URLs completed this run (reached total_count,
         # page_limit, or the watermark) rather than stopping early on a rate-limit/
         # server error - only these should advance the incremental watermark, so a
         # partial pull gets its missing tail retried on the next incremental run.
-        successful_urls = set(df["installation_url"].unique()) & complete_urls
+        fetched_urls = {df["installation_url"].iloc[0] for df in dfs.values()}
+        successful_urls = fetched_urls & complete_urls
 
-        if self.save:
-            paths = {
-                "csv": self.data_dir / (self.file_name + ".csv"),
-                "parquet": self.data_dir / (self.file_name + ".parquet"),
-            }
-
-            if self.incremental and paths["csv"].exists():
-                existing = pd.read_csv(paths["csv"])
-                df = pd.concat([existing, df], ignore_index=True)
-                dedupe_key = (
-                    df["global_id"].fillna(df.get("identifier"))
-                    if "global_id" in df.columns
-                    else df["identifier"]
-                )
-                df["_dedupe_key"] = (
-                    dedupe_key.astype(str) + "|" + df["installation_url"].astype(str)
-                )
-                df = (
-                    df.sort_values("published_at")
-                    .drop_duplicates("_dedupe_key", keep="last")
-                    .drop(columns="_dedupe_key")
-                )
-                logger.info(
-                    f"Incremental merge: {len(existing)} existing + new -> {len(df)} total after dedupe"
-                )
-
-            df.to_csv(paths["csv"], index=False)
-            logger.info(f"Saved CSV to {paths['csv']}")
-
-            # Prepare for parquet - convert all object columns to strings
-            df_parquet = df.copy()
-            for col in df_parquet.select_dtypes(include=["object"]).columns:
-                df_parquet[col] = df_parquet[col].astype(str)
-
-            df_parquet.to_parquet(paths["parquet"], index=False)
-            logger.info(f"Saved Parquet to {paths['parquet']}")
-
+        if not self.save:
+            logger.info("Not saving (--no-save): skipping DB writes")
             if self.incremental:
-                state = _load_state()
-                # Match the "...Z" format the Search API uses for published_at,
-                # since watermarks are compared against it as plain strings.
-                now = datetime.now(tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-                for url in successful_urls:
-                    state[url] = now
-                _save_state(state)
-                logger.info(f"Updated last-pull watermark for {len(successful_urls)} installations")
-        else:
-            logger.info("Not saving any files (--save False)")
-            if self.incremental:
-                logger.info("Incremental run with --no-save: state not updated")
+                logger.info("Incremental run with --no-save: watermarks not advanced")
+            return
+
+        self._upsert_to_db(dfs)
+
+        if self.incremental:
+            now = datetime.now(tz=timezone.utc).replace(tzinfo=None)
+            n = _advance_watermarks(successful_urls, now)
+            logger.info(f"Advanced last-pull watermark for {n} installations")
+
+    def _upsert_to_db(self, dfs: dict[str, pd.DataFrame]) -> None:
+        """Upsert each installation's fetched records into the normalised schema,
+        one transaction per installation."""
+        id_by_url = self._installation_ids()
+        for df in dfs.values():
+            url = df["installation_url"].iloc[0]
+            iid = id_by_url.get(url)
+            if iid is None:
+                logger.warning(
+                    f"{url}: no installation row (run --cmd installations first); "
+                    f"skipping {len(df)} records"
+                )
+                continue
+            items = df.to_dict("records")
+            with get_session() as s:
+                counts = ingest_installation(s.connection(), iid, items)
+            logger.info(f"{url}: upserted {counts}")
+
+    @staticmethod
+    def export_parquet(path: str) -> None:
+        """Dump the core entity tables to a flat parquet for offline sharing.
+        Opt-in; not part of the normal pipeline. Lookups/junctions are not
+        included."""
+        engine = get_engine()
+        dv = pd.read_sql("SELECT * FROM dataverse", engine).assign(_entity="dataverse")
+        ds = pd.read_sql("SELECT * FROM dataset", engine).assign(_entity="dataset")
+        out = pd.concat([dv, ds], ignore_index=True)
+        out.to_parquet(path, index=False)
+        logger.info(f"Exported {len(out)} rows ({len(dv)} dataverse + {len(ds)} dataset) to {path}")
 
     async def _fetch(self):
         """Fetch metadata from all installations in parallel"""

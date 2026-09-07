@@ -1,9 +1,36 @@
 from pathlib import Path
 from typing import Dict
+import math
 import pandas as pd
 import json
 import os
 from requests_cache import CachedSession
+
+from db import get_session
+from db.models import Installation as InstallationRow
+from db.upsert import upsert_rows
+
+_DB_COLS = [
+    "hostname",
+    "url",
+    "name",
+    "description",
+    "lat",
+    "lng",
+    "country",
+    "launch_year",
+    "doi_authority",
+    "dv_hub_id",
+    "metrics",
+]
+
+
+def _clean(value):
+    if value is None:
+        return None
+    if isinstance(value, float) and math.isnan(value):
+        return None
+    return value
 
 
 class Installation:
@@ -20,12 +47,41 @@ class Installation:
             "country": "USA",
         }
 
-    def call(self):
-        """Pull installations, process, and save as CSV + GeoJSON."""
+    def call(self, export_files: bool = False):
+        """Pull installations, process, and upsert into the ``installation`` table.
+
+        Set ``export_files=True`` to also drop the legacy CSV + GeoJSON.
+        """
         raw = self.get_raw()
         df = self.process(raw)
-        self.save_csv(df)
-        self.save_geojson(df)
+        self.save_db(df)
+        if export_files:
+            self.save_csv(df)
+            self.save_geojson(df)
+
+    def save_db(self, df: pd.DataFrame):
+        """Upsert installations into MySQL, keyed on ``url``."""
+        rows = []
+        for _, r in df.iterrows():
+            row = {c: _clean(r.get(c)) for c in _DB_COLS}
+            if not row.get("url"):
+                continue
+            if row.get("metrics") is not None:
+                row["metrics"] = bool(row["metrics"])
+            if row.get("launch_year") is not None:
+                try:
+                    row["launch_year"] = int(row["launch_year"])
+                except (ValueError, TypeError):
+                    row["launch_year"] = None
+            rows.append(row)
+        with get_session() as session:
+            upsert_rows(
+                session.connection(),
+                InstallationRow.__table__,
+                rows,
+                index_elements=["url"],
+                update_cols=[c for c in _DB_COLS if c != "url"],
+            )
 
     def get_raw(self) -> dict:
         session = CachedSession()

@@ -57,12 +57,26 @@ def test_save_geojson_writes_valid_feature_collection(tmp_path):
     assert yale["properties"]["url"] == "https://dataverse.yale.edu"
 
 
-def test_call_pulls_processes_and_saves_both_files(tmp_path):
+def test_call_upserts_to_db_and_skips_files_by_default(tmp_path):
     inst = Installation()
     inst.data_dir = tmp_path
 
-    with patch.object(inst, "get_raw", return_value=RAW):
+    with patch.object(inst, "get_raw", return_value=RAW), patch.object(
+        inst, "save_db"
+    ) as save_db:
         inst.call()
+
+    save_db.assert_called_once()
+    assert not (tmp_path / "installations.csv").exists()
+    assert not (tmp_path / "installations.geojson").exists()
+
+
+def test_call_export_files_also_writes_csv_and_geojson(tmp_path):
+    inst = Installation()
+    inst.data_dir = tmp_path
+
+    with patch.object(inst, "get_raw", return_value=RAW), patch.object(inst, "save_db"):
+        inst.call(export_files=True)
 
     assert (tmp_path / "installations.csv").exists()
     assert (tmp_path / "installations.geojson").exists()
